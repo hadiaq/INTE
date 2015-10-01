@@ -1,30 +1,31 @@
+
 import java.util.Random;
 
-public class Tärning {
+public class Die {
 	
-	private int värde;
+	public int value;
 	
-	public Tärning() {
+	public Die() {
 		Random ran = new Random();
-		this.värde = ran.nextInt(6) +1;
+		this.value = ran.nextInt(6) +1;
 	}
 	
-	public Tärning(int seed) {
+	public Die(int seed) {
 		Random ran = new Random(seed);
-		this.värde = ran.nextInt(6) +1;
+		this.value = ran.nextInt(6) +1;
 	}
 	
 	public int getValue() {
-		return värde;
+		return value;
 	}
 	
 	public void roll() {
 		Random ran = new Random();
-		värde = ran.nextInt(6) +1;
+		value = ran.nextInt(6) +1;
 	}
 	
 	public void seedRoll(int seed) {
 		Random ran = new Random();
-		värde = ran.nextInt(6) +1;
+		value = ran.nextInt(6) +1;
 	}
 }
