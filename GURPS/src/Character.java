@@ -7,6 +7,8 @@ public class Character {
 	private int iq;
 	private int ht;
 	
+	// TEST
+	
 	public Character(int p){
 		this.pts = p;
 		this.st = 10;
