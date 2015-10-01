@@ -33,4 +33,20 @@ public class Character {
 	public int getHealth(){
 		return this.ht;
 	}
+	
+	public void setStrength(int st){
+		this.st = st;
+	}
+	
+	public void setDexterity(int dx){
+		this.dx = dx;
+	}
+	
+	public void setIntelligence(int iq){
+		this.iq = iq;
+	}
+	
+	public void setHealth(int ht){
+		this.ht = ht;
+	}
 }
