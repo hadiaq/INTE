@@ -17,6 +17,8 @@ public class Character {
 		this.ht = 10;
 	}
 	
+	//sync test
+	
 	public int getPoints(){
 		return this.pts;
 	}
