@@ -7,7 +7,6 @@ public class CharacterTest {
 
 	@Test
 	public void constructorTest() {
-		//fail("Not yet implemented");
 		Character newChar = new Character(100);
 		assertEquals(10, newChar.getStrength());
 		assertEquals(10, newChar.getDexterity());
