@@ -19,9 +19,10 @@ public class Die {
 		return value;
 	}
 	
-	public void roll() {
+	public static int roll() {
 		Random ran = new Random();
-		value = ran.nextInt(6) +1;
+		return ran.nextInt(6) +1;
+		
 	}
 	
 	public void seedRoll(int seed) {
