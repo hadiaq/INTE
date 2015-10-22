@@ -6,7 +6,7 @@ public class CombatTest {
 
 	@Test
 	public void attackTest() {
-		Character atk = new Character(100);
+		Character atk = new Character("Per", 100);
 		atk.setStrength(10);
 		boolean strike = Combat.attack(atk);
 		int roll = Combat.totalRoll;
@@ -18,7 +18,7 @@ public class CombatTest {
 	
 	@Test
 	public void defendTest() {
-		Character def = new Character(100);
+		Character def = new Character("olle", 100);
 		def.setStrength(10);
 		boolean defend = Combat.defend(def);
 		int roll = Combat.totalRoll;
