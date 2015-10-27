@@ -1,7 +1,7 @@
 
 public final class Equipment {
 	
-	static class Item {
+	public static class Item {
 		private String description; // t.ex. "Chainmail", "Flail"
 		private int value;
 		private double weight;
@@ -25,7 +25,7 @@ public final class Equipment {
 		}
 	}
 	
-	static class Armor extends Item {
+	public static class Armor extends Item {
 		private int passiveDefense;
 		private int damageResistance;
 		
@@ -42,6 +42,20 @@ public final class Equipment {
 		
 		public int getDamageResistance() {
 			return damageResistance;
+		}
+	}
+	
+	public static class Shield extends Item {
+		private int passiveDefense;
+		
+		public Shield(String description, int value, double weight, int passiveDefense) {
+			super(description, value, weight);
+			
+			this.passiveDefense = passiveDefense;
+		}
+		
+		public int getPassiveDefense() {
+			return passiveDefense;
 		}
 	}
 }
