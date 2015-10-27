@@ -83,8 +83,9 @@ public final class Equipment {
 	
 	public abstract static class Weapon extends Item {
 		private int minimumStrength; // Minimum strength to wield the weapon
-		private int damageType;
+		private int damageType; // Any combination of impaling, cutting and crushing
 		
+		// damageType flags
 		public static final int DAMAGE_TYPE_IMPALING = 1; // 001
 		public static final int DAMAGE_TYPE_CUTTING  = 2; // 010
 		public static final int DAMAGE_TYPE_CRUSHING = 4; // 100
@@ -112,6 +113,12 @@ public final class Equipment {
 			public static class Dagger extends HandWeapon {
 				public Dagger() {
 					super("Dagger", 20, 0.25, 0, DAMAGE_TYPE_IMPALING);
+				}
+			}
+			
+			public static class SmallKnife extends HandWeapon {
+				public SmallKnife() {
+					super("Small knife", 30, 0.5, 0, DAMAGE_TYPE_CUTTING & DAMAGE_TYPE_IMPALING);
 				}
 			}
 		}

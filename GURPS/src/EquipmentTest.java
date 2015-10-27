@@ -57,4 +57,14 @@ public class EquipmentTest {
 		assertEquals(0, dagger.getMinimumStrength());
 		assertEquals(Equipment.Weapon.DAMAGE_TYPE_IMPALING, dagger.getDamageType());
 	}
+	
+	@Test
+	public void smallKnifeConstructorTest() {
+		Equipment.Weapon.HandWeapon.SmallKnife smallKnife = new Equipment.Weapon.HandWeapon.SmallKnife();
+		assertEquals("Small knife", smallKnife.getDescription());
+		assertEquals(30, smallKnife.getValue());
+		assertEquals(0.5, smallKnife.getWeight());
+		assertEquals(0, smallKnife.getMinimumStrength());
+		assertEquals(Equipment.Weapon.DAMAGE_TYPE_CUTTING & Equipment.Weapon.DAMAGE_TYPE_IMPALING, smallKnife.getDamageType());
+	}
 }
