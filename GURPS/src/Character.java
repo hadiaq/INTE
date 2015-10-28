@@ -15,7 +15,7 @@ public class Character {
 	private int ht;
 
 	// Lista av karaktärens föremål
-	private ArrayList<Equipment.Item> items = new ArrayList<Equipment.Item>();ff
+	private ArrayList<Equipment.Item> items = new ArrayList<Equipment.Item>();
 	
 	public Character(String name, int points) {
 		this.name = name;
