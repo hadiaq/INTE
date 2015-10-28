@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class EquipmentTest {
+	private static final double DELTA = 1e-15; // Behövs för assertEquals(double, double, double)
 
 	@Test
 	public void itemConstructorTest() {
@@ -9,7 +10,7 @@ public class EquipmentTest {
 		
 		assertEquals("Ring", ring.getDescription());
 		assertEquals(20, ring.getValue());
-		assertEquals(0.0, ring.getWeight());
+		assertEquals(0.0, ring.getWeight(), DELTA);
 	}
 	
 	@Test
@@ -18,7 +19,7 @@ public class EquipmentTest {
 		
 		assertEquals("Leather Jacket", leatherJacket.getDescription());
 		assertEquals(50, leatherJacket.getValue());
-		assertEquals(4.0, leatherJacket.getWeight());
+		assertEquals(4.0, leatherJacket.getWeight(), DELTA);
 		assertEquals(1, leatherJacket.getPassiveDefense());
 		assertEquals(1, leatherJacket.getDamageResistance());
 		assertEquals(8, leatherJacket.getTechLevel());
@@ -42,7 +43,7 @@ public class EquipmentTest {
 		
 		assertEquals("Buckler", buckler.getDescription());
 		assertEquals(25, buckler.getValue());
-		assertEquals(2.0, buckler.getWeight());
+		assertEquals(2.0, buckler.getWeight(), DELTA);
 		assertEquals(1, buckler.getPassiveDefense());
 	}
 	
@@ -52,7 +53,7 @@ public class EquipmentTest {
 		
 		assertEquals("Dagger", dagger.getDescription());
 		assertEquals(20, dagger.getValue());
-		assertEquals(0.25, dagger.getWeight());
+		assertEquals(0.25, dagger.getWeight(), DELTA);
 		assertEquals(0, dagger.getMinimumStrength());
 		assertEquals(Equipment.Weapon.DAMAGE_TYPE_IMPALING, dagger.getDamageType());
 	}
@@ -62,7 +63,7 @@ public class EquipmentTest {
 		Equipment.Weapon.HandWeapon.SmallKnife smallKnife = new Equipment.Weapon.HandWeapon.SmallKnife();
 		assertEquals("Small knife", smallKnife.getDescription());
 		assertEquals(30, smallKnife.getValue());
-		assertEquals(0.5, smallKnife.getWeight());
+		assertEquals(0.5, smallKnife.getWeight(), DELTA);
 		assertEquals(0, smallKnife.getMinimumStrength());
 		assertEquals(Equipment.Weapon.DAMAGE_TYPE_CUTTING & Equipment.Weapon.DAMAGE_TYPE_IMPALING, smallKnife.getDamageType());
 	}
