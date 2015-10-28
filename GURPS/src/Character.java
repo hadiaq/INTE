@@ -6,13 +6,16 @@ public class Character {
 	private String appearance;
 	private int ptsTotal;
 	
-	//Lista över advantages som är aktiva hos denna karaktär
+	//Lista ï¿½ver advantages som ï¿½r aktiva hos denna karaktï¿½r
 	private ArrayList<Advantage> charAdvantages = new ArrayList<Advantage>();
 	private int ptsUnspent;
 	private int st;
 	private int dx;
 	private int iq;
 	private int ht;
+
+	// Lista av karaktÃ¤rens fÃ¶remÃ¥l
+	private ArrayList<Equipment.Item> items = new ArrayList<Equipment.Item>();
 	
 	public Character(String name, int points) {
 		this.name = name;
@@ -24,7 +27,21 @@ public class Character {
 		this.ht = 10;
 	}
 	
-	//Hämtar advantage ur den gemensamma listan i GURPSmain oh lägger till i karaktärens egna lista
+	// Equippar ett item hos karaktÃ¤ren
+	public void equip(Equipment.Item item) {
+		if (items.contains(item)) {
+			throw new IllegalArgumentException("Item already equipped"); // Itemet finns redan equippat => fel
+		} else {
+			items.add(item);
+		}
+	}
+
+	// Returnerar en *kopia* av listan av alla equippade items
+	public List<Equipment.Item> getEquippedItemsList() {
+		return new ArrayList<Equipment.Item>(items);
+	}
+	
+	//Hï¿½mtar advantage ur den gemensamma listan i GURPSmain oh lï¿½gger till i karaktï¿½rens egna lista
 	public void addAdvantage(String name) {
 		for (Advantage adv : GURPSmain.advantages) {
 			if (adv.getName().equals(name)) {
@@ -34,7 +51,7 @@ public class Character {
 		}
 	}
 	
-	// Denna metod är till för att justera poäng i förhållande till vad attributet kostar
+	// Denna metod ï¿½r till fï¿½r att justera poï¿½ng i fï¿½rhï¿½llande till vad attributet kostar
 	private void setAttribute(int level) {
 		int pointCost = 0;
 		if (level >= 1 && level <= 7) {

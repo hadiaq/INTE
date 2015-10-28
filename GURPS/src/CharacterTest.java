@@ -42,4 +42,23 @@ public class CharacterTest {
 		newChar.setHealth(13);
 		assertEquals(13, newChar.getHealth());
 	}
+	
+	@Test
+	public void equipItemTest() {
+		Character newChar = new Character("Test", 100);
+		Equipment.Item item = new Item("Ring", 20, 0.0);
+		newChar.equip(item);
+		ArrayList<Equipment.Item> compare = new ArrayList<Equipment.Item>();
+		compare.add(item);
+		assertEquals(newChar.getEquippedItemsList(), compare);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void equipAlreadyEquippedItemTest() {
+		// Equippa ett item när det redan är equippat hos en character => fel
+		Character newChar = new Character("Test", 100);
+		Equipment.Item item = new Item("Ring", 20, 0.0);
+		newChar.equip(item);
+		newChar.equip(item);
+	}
 }
