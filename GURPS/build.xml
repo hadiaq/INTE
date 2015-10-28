@@ -1,0 +1,54 @@
+<!--
+    Används såhär:
+    ant clean       - Rensar alla .class-filer i bin och GURPS.jar
+    ant compile     - Kompilerar källkoden och skapar .class-filer i bin
+    ant jar         - Skapar GURPS.jar från .class-filerna i bin
+    ant run         - Kör programmet (GURPS.jar)
+    ant junit       - Exekverar alla *Test.class-filer, dvs. kör igenom alla testfall
+-->    
+<project>
+    <path id="application" location="GURPS.jar"/>
+    <path id="classpath">
+        <fileset dir="lib" includes="**/*.jar"/>
+    </path>
+
+    <target name="clean">
+        <delete dir="bin"/>
+        <mkdir dir="bin"/>
+        <delete file="GURPS.jar"/>
+    </target>
+
+    <target name="compile">
+        <javac srcdir="src" destdir="bin">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="GURPS.jar" basedir="bin">
+            <manifest>
+                <attribute name="Main-Class" value="GURPSmain"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends="jar">
+        <java jar="GURPS.jar" fork="true"/>
+    </target>
+
+    <target name="junit" depends="jar">
+        <junit printsummary="yes">
+            <classpath>
+                <path refid="classpath"/>
+                <path refid="application"/>
+            </classpath>
+
+            <batchtest fork="yes">
+                <fileset dir="src" includes="*Test.java"/>
+            </batchtest>
+        </junit>
+    </target>
+
+</project>
