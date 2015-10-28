@@ -1,0 +1,29 @@
+<!-- Används såhär:
+	ant clean			- Tar bort alla .class filer i "bin"
+	ant compile			- Kompilerar alla .java-filer i "src" och lägger dem i "bin"
+	ant jar 			- Skapar en exekverarbar JAR-fil, "GURPS.jar"
+	ant run 			- Kör JAR-filen och programkoden
+-->
+<project name="GURPS" default="build" basedir=".">
+	<target name="clean">
+		<delete dir="bin"/>
+		<mkdir dir="bin"/>
+	</target>
+
+	<target name="compile">
+		<mkdir dir="bin"/>
+		<javac srcdir="src" destdir="bin" classpath="junit-4.12.jar; hemcrest-core-1.3.jar"/>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="bin/GURPS.jar" basedir="bin">
+			<manifest>
+				<attribute name="Main-Class" value="GURPSmain"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="run" depends="jar">
+		<java jar="bin/GURPS.jar" fork="true"/>
+	</target>
+</project>
