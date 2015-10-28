@@ -8,6 +8,7 @@ public class Character {
 	
 	//Lista �ver advantages som �r aktiva hos denna karakt�r
 	private ArrayList<Advantage> charAdvantages = new ArrayList<Advantage>();
+	private ArrayList<Equipment> charEquipment = new ArrayList<Equipment>();
 	private int ptsUnspent;
 	private int st;
 	private int dx;
