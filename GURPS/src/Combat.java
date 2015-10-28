@@ -4,8 +4,16 @@
 public class Combat {
 	static int totalRoll;
 	static int damageRoll;
+	private Character char1;
+	private Character char2;
 	//Gick på str pga att attackskill ej är implementerat men ville kunna göra koden möjlig ändå
 	//Jag har även ignorerat turordning tillsvidare
+	
+	public Combat (Character char1, Character char2) {
+		this.char1 = char1;
+		this.char2 = char2;
+	}
+	
 	public static boolean attack(Character atk, Character def){
 		
 		totalRoll = 0;
