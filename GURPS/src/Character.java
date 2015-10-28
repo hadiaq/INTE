@@ -37,7 +37,7 @@ public class Character {
 	}
 
 	// Returnerar en *kopia* av listan av alla equippade items
-	public List<Equipment.Item> getEquippedItemsList() {
+	public ArrayList<Equipment.Item> getEquippedItemsList() {
 		return new ArrayList<Equipment.Item>(items);
 	}
 	
