@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 
 import javax.swing.*;
 
@@ -10,6 +11,21 @@ public class GURPSmain extends JFrame {
 	public static ArrayList<Character> characters = new ArrayList<Character>();
 	ListModel advantagesDataModel = new ListModel();
 	JList<String> advantageList = new JList<String>(advantagesDataModel);
+	static JLabel charName = new JLabel("[enter name]");
+	static JLabel charPoints = new JLabel("[total points]");
+	static JLabel charUpoints = new JLabel("[unspent points]");
+	static JLabel ST = new JLabel("[st value]");
+	static JLabel DX = new JLabel("[dx value]");
+	static JLabel IQ = new JLabel("[iq value]");
+	static JLabel HT = new JLabel("[ht value]");
+	static JButton redST = new JButton("-");
+	static JButton addST = new JButton("+");
+	static JButton redDX = new JButton("-");
+	static JButton addDX = new JButton("+");
+	static JButton redIQ = new JButton("-");
+	static JButton addIQ = new JButton("+");
+	static JButton redHT = new JButton("-");
+	static JButton addHT = new JButton("+");
 
 	GURPSmain() {
 		
@@ -23,6 +39,7 @@ public class GURPSmain extends JFrame {
 	    JMenuItem quit= new JMenuItem("Quit");
 	    
 	    file.add(newChar);
+	    newChar.addActionListener(new ListenerNewChar());
 	    file.add(open);
 	    file.add(save);
 	    file.add(quit);
@@ -38,7 +55,6 @@ public class GURPSmain extends JFrame {
 		
 		JPanel namePanel = new JPanel();
 		JLabel charNameL = new JLabel("Name : ");
-		JLabel charName = new JLabel("[enter name]");
 		namePanel.add(charNameL);
 		namePanel.add(charName);
 		
@@ -56,13 +72,11 @@ public class GURPSmain extends JFrame {
 		
 		JPanel pointPanel = new JPanel();
 		JLabel charPointsL = new JLabel("Points : ");
-		JLabel charPoints = new JLabel("[total points]");
 		pointPanel.add(charPointsL);
 		pointPanel.add(charPoints);
 		
 		JPanel uPointPanel = new JPanel();
 		JLabel charUpointsL = new JLabel("Unspent : ");
-		JLabel charUpoints = new JLabel("[unspent points]");
 		uPointPanel.add(charUpointsL);
 		uPointPanel.add(charUpoints);
 		
@@ -77,25 +91,39 @@ public class GURPSmain extends JFrame {
 		
 		JPanel strengthPanel = new JPanel();
 		JLabel STL = new JLabel("ST : ");
-		JLabel ST = new JLabel("[st value]");
+		strengthPanel.add(redST);
+		redST.setEnabled(false);
+		redST.addActionListener(new reduceST());
+		strengthPanel.add(addST);
+		addST.setEnabled(false);
+		addST.addActionListener(new increaseST());
 		strengthPanel.add(STL);
 		strengthPanel.add(ST);
 		
 		JPanel dexPanel = new JPanel();
 		JLabel DXL = new JLabel("DX : ");
-		JLabel DX = new JLabel("[dx value]");
+		dexPanel.add(redDX);
+		redDX.setEnabled(false);
+		dexPanel.add(addDX);
+		addDX.setEnabled(false);
 		dexPanel.add(DXL);
 		dexPanel.add(DX);
 		
 		JPanel intPanel = new JPanel();
 		JLabel IQL = new JLabel("IQ : ");
-		JLabel IQ = new JLabel("[iq value]");
+		intPanel.add(redIQ);
+		redIQ.setEnabled(false);
+		intPanel.add(addIQ);
+		addIQ.setEnabled(false);
 		intPanel.add(IQL);
 		intPanel.add(IQ);
 		
 		JPanel htPanel = new JPanel();
 		JLabel HTL = new JLabel("HT : ");
-		JLabel HT = new JLabel("[ht value]");
+		htPanel.add(redHT);
+		redHT.setEnabled(false);
+		htPanel.add(addHT);
+		addHT.setEnabled(false);
 		htPanel.add(HTL);
 		htPanel.add(HT);
 		
@@ -166,7 +194,6 @@ public class GURPSmain extends JFrame {
 		setResizable(true);
 		setVisible(true);
 
-		
 		// Skapar exempelkaraktären från manualen
 		createCharacter("Dai Blackthorn", 100);
 		
@@ -200,6 +227,39 @@ public class GURPSmain extends JFrame {
 		advantagesDataModel.addSorted("Double Jointed");
 	}
 	
+    class ListenerNewChar implements ActionListener {
+		public void actionPerformed (ActionEvent ave) {
+			CharacterForm charForm = new CharacterForm();
+			
+			int ans = JOptionPane.showConfirmDialog(GURPSmain.this, charForm);
+			if (ans != JOptionPane.OK_OPTION) {
+				return;
+			}
+			
+			String charName = charForm.getName();
+			String charPoints = charForm.getPoints();
+			
+			GURPSmain.charName.setText(charName);
+			GURPSmain.charPoints.setText(charPoints);
+			GURPSmain.charUpoints.setText(charPoints);
+			GURPSmain.ST.setText("10");
+			redST.setEnabled(true);
+			addST.setEnabled(true);
+			GURPSmain.DX.setText("10");
+			redDX.setEnabled(true);
+			addDX.setEnabled(true);
+			GURPSmain.IQ.setText("10");
+			redIQ.setEnabled(true);
+			addIQ.setEnabled(true);
+			GURPSmain.HT.setText("10");
+			redHT.setEnabled(true);
+			addHT.setEnabled(true);
+			
+			int parsedPts = Integer.parseInt(charPoints);
+			createCharacter(charName, parsedPts);
+		}
+    }
+	
 	class ListModel extends DefaultListModel<String>{
 		
 		public void addSorted(String addNew){
@@ -216,6 +276,32 @@ public class GURPSmain extends JFrame {
 			remove(pos);
 		}
 
+	}
+	
+	public class reduceST implements ActionListener {
+		public void actionPerformed (ActionEvent ae) {
+			int currentST = Integer.parseInt(ST.getText());
+			setCharacterST(charName.getText(), currentST-1);
+			int unspentPoints = getCharacterUpoints(charName.getText());
+			currentST--;
+			String newST = Integer.toString(currentST);
+			String newUP = Integer.toString(unspentPoints);
+			ST.setText(newST);
+			charUpoints.setText(newUP);
+		}
+	}
+	
+	public class increaseST implements ActionListener {
+		public void actionPerformed (ActionEvent ae) {
+			int currentST = Integer.parseInt(ST.getText());
+			setCharacterST(charName.getText(), currentST+1);
+			int unspentPoints = getCharacterUpoints(charName.getText());
+			currentST++;
+			String newST = Integer.toString(currentST);
+			String newUP = Integer.toString(unspentPoints);
+			ST.setText(newST);
+			charUpoints.setText(newUP);
+		}
 	}
 	
 	public void createCharacter(String name, int points) {
@@ -270,6 +356,16 @@ public class GURPSmain extends JFrame {
 				ch.setHealth(value);
 			}
 		}
+	}
+	
+	public int getCharacterUpoints(String recipient) {
+		int p = 0;
+		for (Character ch : characters) {
+			if (ch.getName().equals(recipient)) {
+				p = ch.getPointsUnspent();
+			}
+		}
+		return p;
 	}
 	
 	public void startCombat(String name1, String name2) {

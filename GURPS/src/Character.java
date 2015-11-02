@@ -53,10 +53,10 @@ public class Character {
 	}
 	
 	// Denna metod �r till f�r att justera po�ng i f�rh�llande till vad attributet kostar
-	private void setAttribute(int level) {
+	public int setAttribute(int level) {
 		int pointCost = 0;
 		if (level >= 1 && level <= 7) {
-			pointCost = -90 + level*10;
+			pointCost = -90 + -(level*10);
 		}
 		else if (level == 8) {
 			pointCost = -15;
@@ -80,7 +80,7 @@ public class Character {
 			pointCost = 100 + ((level-17)* 25);
 		}
 		
-		ptsUnspent -= pointCost;
+		return pointCost;
 	}
 	
 	public String getName(){
@@ -112,22 +112,22 @@ public class Character {
 	}
 	
 	public void setStrength(int st){
-		setAttribute(st);
+		ptsUnspent -= setAttribute(st);
 		this.st = st;
 	}
 	
 	public void setDexterity(int dx){
-		setAttribute(dx);
+		ptsUnspent -=setAttribute(dx);
 		this.dx = dx;
 	}
 	
 	public void setIntelligence(int iq){
-		setAttribute(iq);
+		ptsUnspent -=setAttribute(iq);
 		this.iq = iq;
 	}
 	
 	public void setHealth(int ht){
-		setAttribute(ht);
+		ptsUnspent -=setAttribute(ht);
 		this.ht = ht;
 	}
 	
