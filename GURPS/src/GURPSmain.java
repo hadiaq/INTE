@@ -93,7 +93,7 @@ public class GURPSmain extends JFrame {
 		JLabel STL = new JLabel("ST : ");
 		strengthPanel.add(redST);
 		redST.setEnabled(false);
-		redST.addActionListener(new reduceST());
+		redST.addActionListener(new decreaseST());
 		strengthPanel.add(addST);
 		addST.setEnabled(false);
 		addST.addActionListener(new increaseST());
@@ -104,8 +104,10 @@ public class GURPSmain extends JFrame {
 		JLabel DXL = new JLabel("DX : ");
 		dexPanel.add(redDX);
 		redDX.setEnabled(false);
+		redDX.addActionListener(new decreaseDX());
 		dexPanel.add(addDX);
 		addDX.setEnabled(false);
+		addDX.addActionListener(new increaseDX());
 		dexPanel.add(DXL);
 		dexPanel.add(DX);
 		
@@ -113,8 +115,10 @@ public class GURPSmain extends JFrame {
 		JLabel IQL = new JLabel("IQ : ");
 		intPanel.add(redIQ);
 		redIQ.setEnabled(false);
+		redIQ.addActionListener(new decreaseIQ());
 		intPanel.add(addIQ);
 		addIQ.setEnabled(false);
+		addIQ.addActionListener(new increaseIQ());
 		intPanel.add(IQL);
 		intPanel.add(IQ);
 		
@@ -122,8 +126,10 @@ public class GURPSmain extends JFrame {
 		JLabel HTL = new JLabel("HT : ");
 		htPanel.add(redHT);
 		redHT.setEnabled(false);
+		redHT.addActionListener(new decreaseHT());
 		htPanel.add(addHT);
 		addHT.setEnabled(false);
+		addHT.addActionListener(new increaseHT());
 		htPanel.add(HTL);
 		htPanel.add(HT);
 		
@@ -218,10 +224,10 @@ public class GURPSmain extends JFrame {
 		addAdvantageToChar("Dai Blackthorn", "Double-Jointed");
 		
 		//Tilldela attribut
-		setCharacterST("Dai Blackthorn", 8);
-		setCharacterDX("Dai Blackthorn", 15);
-		setCharacterIQ("Dai Blackthorn", 12);
-		setCharacterHT("Dai Blackthorn", 12);
+//		setCharacterST("Dai Blackthorn", 8);
+//		setCharacterDX("Dai Blackthorn", 15);
+//		setCharacterIQ("Dai Blackthorn", 12);
+//		setCharacterHT("Dai Blackthorn", 12);
 		
 		advantagesDataModel.addSorted("Absolute Direction");
 		advantagesDataModel.addSorted("Double Jointed");
@@ -278,31 +284,54 @@ public class GURPSmain extends JFrame {
 
 	}
 	
-	public class reduceST implements ActionListener {
+	public class decreaseST implements ActionListener {
 		public void actionPerformed (ActionEvent ae) {
-			int currentST = Integer.parseInt(ST.getText());
-			setCharacterST(charName.getText(), currentST-1);
-			int unspentPoints = getCharacterUpoints(charName.getText());
-			currentST--;
-			String newST = Integer.toString(currentST);
-			String newUP = Integer.toString(unspentPoints);
-			ST.setText(newST);
-			charUpoints.setText(newUP);
+			decreaseAttribute(charName.getText(), "ST");
 		}
 	}
 	
 	public class increaseST implements ActionListener {
 		public void actionPerformed (ActionEvent ae) {
-			int currentST = Integer.parseInt(ST.getText());
-			setCharacterST(charName.getText(), currentST+1);
-			int unspentPoints = getCharacterUpoints(charName.getText());
-			currentST++;
-			String newST = Integer.toString(currentST);
-			String newUP = Integer.toString(unspentPoints);
-			ST.setText(newST);
-			charUpoints.setText(newUP);
+			increaseAttribute(charName.getText(), "ST");
 		}
 	}
+	
+	public class decreaseDX implements ActionListener {
+		public void actionPerformed (ActionEvent ae) {
+			decreaseAttribute(charName.getText(), "DX");
+		}
+	}
+	
+	public class increaseDX implements ActionListener {
+		public void actionPerformed (ActionEvent ae) {
+			increaseAttribute(charName.getText(), "DX");
+		}
+	}
+	
+	public class decreaseIQ implements ActionListener {
+		public void actionPerformed (ActionEvent ae) {
+			decreaseAttribute(charName.getText(), "IQ");
+		}
+	}
+	
+	public class increaseIQ implements ActionListener {
+		public void actionPerformed (ActionEvent ae) {
+			increaseAttribute(charName.getText(), "IQ");
+		}
+	}
+	
+	public class decreaseHT implements ActionListener {
+		public void actionPerformed (ActionEvent ae) {
+			decreaseAttribute(charName.getText(), "HT");
+		}
+	}
+	
+	public class increaseHT implements ActionListener {
+		public void actionPerformed (ActionEvent ae) {
+			increaseAttribute(charName.getText(), "HT");
+		}
+	}
+	
 	
 	public void createCharacter(String name, int points) {
 		Character ch = new Character(name, points);
@@ -326,46 +355,135 @@ public class GURPSmain extends JFrame {
 		}
 	}
 	
-	public void setCharacterST(String recipient, int value) {
+	public int attributeCost (int value) {
+		int cost = 0;
+		switch (value) {
+			case 0 : cost = -90; break;
+			case 1 : cost = -80; break;
+			case 2 : cost = -70; break;
+			case 3 : cost = -60; break;
+			case 4 : cost = -50; break;
+			case 5 : cost = -40; break;
+			case 6 : cost = -30; break;
+			case 7 : cost = -20; break;
+			case 8 : cost = -15; break;
+			case 9 : cost = -10; break;
+			case 10 : cost = 0;  break;
+			case 11 : cost = 10; break;
+			case 12 : cost = 20; break;
+			case 13 : cost = 30; break;
+			case 14 : cost = 45; break;
+			case 15 : cost = 60; break;
+			case 16 : cost = 80; break;
+			case 17 : cost = 100; break;
+			case 18 : cost = 125; break;
+		}
+		return cost;
+	}
+	
+	public void disableButtons() {
+		
 		for (Character ch : characters) {
-			if (ch.getName().equals(recipient)) {
-				ch.setStrength(value);
-			}
+			
+			String newST = Integer.toString(ch.getStrength());
+			String newDX = Integer.toString(ch.getDexterity());
+			String newIQ = Integer.toString(ch.getIntelligence());
+			String newHT = Integer.toString(ch.getHealth());
+			String newPts = Integer.toString(ch.getPointsUnspent());
+			
+			ST.setText(newST);
+			DX.setText(newDX);
+			IQ.setText(newIQ);
+			HT.setText(newHT);
+			charUpoints.setText(newPts);
+			
+			if (ch.getStrength() == 1)
+				redST.setEnabled(false);
+			else
+				redST.setEnabled(true);
+			
+			if (attributeCost(ch.getStrength()+1) - attributeCost(ch.getStrength()) > ch.getPointsUnspent())
+				addST.setEnabled(false);
+			else
+				addST.setEnabled(true);
+			
+			if (ch.getDexterity() == 1)
+				redDX.setEnabled(false);
+			else
+				redDX.setEnabled(true);
+			
+			if (attributeCost(ch.getDexterity()+1) - attributeCost(ch.getDexterity()) > ch.getPointsUnspent())
+				addDX.setEnabled(false);
+			else
+				addDX.setEnabled(true);
+			
+			if (ch.getIntelligence() == 1)
+				redIQ.setEnabled(false);
+			else
+				redIQ.setEnabled(true);
+			
+			if (attributeCost(ch.getIntelligence()+1) - attributeCost(ch.getIntelligence()) > ch.getPointsUnspent())
+				addIQ.setEnabled(false);
+			else
+				addIQ.setEnabled(true);
+			
+			if (ch.getHealth() == 1)
+				redHT.setEnabled(false);
+			else
+				redHT.setEnabled(true);
+			
+			if (attributeCost(ch.getHealth()+1) - attributeCost(ch.getHealth()) > ch.getPointsUnspent())
+				addHT.setEnabled(false);
+			else
+				addHT.setEnabled(true);
+			
 		}
 	}
 	
-	public void setCharacterDX(String recipient, int value) {
+	public void decreaseAttribute(String recipient, String attribute) {
 		for (Character ch : characters) {
-			if (ch.getName().equals(recipient)) {
-				ch.setDexterity(value);
+			
+			switch(attribute) {
+				case "ST": ch.setStrength(ch.getStrength()-1);
+				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getStrength()) - attributeCost(ch.getStrength()+1)));
+				break;
+				case "DX" : ch.setDexterity(ch.getDexterity()-1); 
+				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getDexterity()) - attributeCost(ch.getDexterity()+1)));
+				break;
+				case "IQ" : ch.setIntelligence(ch.getIntelligence()-1); 
+				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getIntelligence()) - attributeCost(ch.getIntelligence()+1)));
+				break;
+				case "HT" : ch.setHealth(ch.getHealth()-1); 
+				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getHealth()) - attributeCost(ch.getHealth()+1)));
+				break;
+				default : System.out.println("Attribute not found");
 			}
+			
+			disableButtons();
 		}
 	}
 	
-	public void setCharacterIQ(String recipient, int value) {
+	public void increaseAttribute(String recipient, String attribute) {
 		for (Character ch : characters) {
-			if (ch.getName().equals(recipient)) {
-				ch.setIntelligence(value);
+			
+			switch(attribute) {
+				case "ST": ch.setStrength(ch.getStrength()+1);
+				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getStrength()) - attributeCost(ch.getStrength()-1)));
+				break;
+				case "DX" : ch.setDexterity(ch.getDexterity()+1);
+				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getDexterity()) - attributeCost(ch.getDexterity()-1)));
+				break;
+				case "IQ" : ch.setIntelligence(ch.getIntelligence()+1); 
+				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getIntelligence()) - attributeCost(ch.getIntelligence()-1)));
+				break;
+				case "HT" : ch.setHealth(ch.getHealth()+1); 
+				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getHealth()) - attributeCost(ch.getHealth()-1)));
+				break;
+				default : System.out.println("Attribute not found");
 			}
+		
+			disableButtons();
 		}
-	}
-	
-	public void setCharacterHT(String recipient, int value) {
-		for (Character ch : characters) {
-			if (ch.getName().equals(recipient)) {
-				ch.setHealth(value);
-			}
-		}
-	}
-	
-	public int getCharacterUpoints(String recipient) {
-		int p = 0;
-		for (Character ch : characters) {
-			if (ch.getName().equals(recipient)) {
-				p = ch.getPointsUnspent();
-			}
-		}
-		return p;
 	}
 	
 	public void startCombat(String name1, String name2) {
