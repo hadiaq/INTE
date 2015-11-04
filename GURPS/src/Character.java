@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Character {
 	
@@ -7,7 +10,8 @@ public class Character {
 	private int ptsTotal;
 	
 	//Lista �ver advantages som �r aktiva hos denna karakt�r
-	private ArrayList<Advantage> charAdvantages = new ArrayList<Advantage>();
+	private Map<String, Advantage> advantages = new HashMap<String, Advantage>();
+	public ArrayList<Advantage> charAdvantages = new ArrayList<Advantage>();
 	private ArrayList<Equipment> charEquipment = new ArrayList<Equipment>();
 	private int ptsUnspent;
 	private int st;
@@ -44,113 +48,33 @@ public class Character {
 	
 	//H�mtar advantage ur den gemensamma listan i GURPSmain oh l�gger till i karakt�rens egna lista
 	public void addAdvantage(String name) {
-		for (Advantage adv : GURPSmain.advantages) {
-			if (adv.getName().equals(name)) {
-				ptsUnspent -= adv.getPointCost();
-				charAdvantages.add(adv);
-			}
-		}
+		advantages.put(name, GURPSmain.advMap.get(name));
+
 	}
 	
-	// Denna metod �r till f�r att justera po�ng i f�rh�llande till vad attributet kostar
-//	public int setAttribute(int level) {
-//		
-//		int pointCost = 0;
-//		
-//		switch (level) {
-//		case 1: pointCost = -80;
-//		break;
-//		
-//		case 2: pointCost = -70;
-//		break;
-//		
-//		case 3: pointCost = -60;
-//		break;
-//		
-//		case 4: pointCost = -50;
-//		break;
-//		
-//		case 5: pointCost = -40;
-//		break;
-//		
-//		case 6: pointCost = -30;
-//		break;
-//		
-//		case 7: pointCost = -20;
-//		break;
-//		
-//		case 8: pointCost = -15;
-//		break;
-//		
-//		case 9: pointCost = -10;
-//		break;
-//		
-//		case 10: pointCost = 0;
-//		break;
-//		
-//		case 11: pointCost = 10;
-//		break;
-//		
-//		case 12: pointCost = 20;
-//		break;
-//		
-//		case 13: pointCost = 30;
-//		break;
-//		
-//		case 14: pointCost = 45;
-//		break;
-//		
-//		case 15: pointCost = 60;
-//		break;
-//		
-//		case 16: pointCost = 80;
-//		break;
-//		
-//		case 17: pointCost = 100;
-//		break;
-//		
-//		case 18: pointCost = 125;
-//		break;
-//		
-//		default: pointCost = 0;
-//		break;
-//		
-//		}
-		
-//		if (level >= 1 && level <= 7) {
-//			pointCost = -90 + -(level*10);
-//		}
-//		else if (level == 8) {
-//			pointCost = -15;
-//		}
-//		else if (level == 9) {
-//			pointCost = -10;
-//		}
-//		else if (level >= 11 && level <= 13) {
-//			pointCost = (level-10)*10;
-//		}
-//		else if (level == 14) {
-//			pointCost = 45;
-//		}
-//		else if (level == 15) {
-//			pointCost = 60;
-//		}
-//		else if (level == 16) {
-//			pointCost = 80;
-//		}
-//		else if (level >= 17) {
-//			pointCost = 100 + ((level-17)* 25);
-//		}
-//		
-//		return pointCost;
-//	}
+	public void removeAdvantage(String name) {
+		advantages.remove(name);
+
+	}
+	
+	public Map<String, Advantage> getAdvantages() {
+		return advantages;
+	}
 	
 	public String getName(){
 		return this.name;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public int getPointsTotal(){
 		return this.ptsTotal;
+	}
+	
+	public void setPointsTotal(int pts) {
+		this.ptsTotal = pts;
 	}
 	
 	public int getPointsUnspent() {
@@ -178,22 +102,18 @@ public class Character {
 	}
 	
 	public void setStrength(int st){
-//		ptsUnspent -= setAttribute(st);
 		this.st = st;
 	}
 	
 	public void setDexterity(int dx){
-//		ptsUnspent -=setAttribute(dx);
 		this.dx = dx;
 	}
 	
 	public void setIntelligence(int iq){
-//		ptsUnspent -=setAttribute(iq);
 		this.iq = iq;
 	}
 	
 	public void setHealth(int ht){
-//		ptsUnspent -=setAttribute(ht);
 		this.ht = ht;
 	}
 	
@@ -205,6 +125,6 @@ public class Character {
 				+"\nDX : " +dx
 				+"\nIQ : " +iq
 				+"\nHT : " +ht
-				+"\nAdvantages : " +charAdvantages;
+				+"\nAdvantages : " +advantages;
 	}
 }

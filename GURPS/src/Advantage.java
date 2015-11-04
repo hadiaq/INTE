@@ -15,12 +15,24 @@ public class Advantage {
 		return name;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
 	
+	public void setDescription(String desc) {
+		this.description = desc;
+	}
+	
 	public int getPointCost() {
 		return pointCost;
+	}
+	
+	public void setPointCost(int cost) {
+		this.pointCost = cost;
 	}
 	
 	public String toString(){

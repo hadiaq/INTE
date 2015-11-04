@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -7,8 +9,12 @@ import javax.swing.*;
 
 public class GURPSmain extends JFrame {
 	
+	public static Map<String, Character> charMap = new HashMap<String, Character>();
+	public static Map<String, Advantage> advMap = new HashMap<String, Advantage>();
+	
 	public static ArrayList<Advantage> advantages = new ArrayList<Advantage>();
 	public static ArrayList<Character> characters = new ArrayList<Character>();
+	
 	ListModel advantagesDataModel = new ListModel();
 	JList<String> advantageList = new JList<String>(advantagesDataModel);
 	static JLabel charName = new JLabel("[enter name]");
@@ -26,6 +32,8 @@ public class GURPSmain extends JFrame {
 	static JButton addIQ = new JButton("+");
 	static JButton redHT = new JButton("-");
 	static JButton addHT = new JButton("+");
+	static JButton addADV = new JButton("Add Advantage");
+	static JButton remADV = new JButton("Remove Advantage");
 
 	GURPSmain() {
 		
@@ -33,15 +41,14 @@ public class GURPSmain extends JFrame {
 		
 	    JMenuBar fileMenu = new JMenuBar();
 	    JMenu file = new JMenu("File");
-	    JMenuItem newChar= new JMenuItem("New Character");
-	    JMenuItem open= new JMenuItem("Open");
-	    JMenuItem save= new JMenuItem("Save");
-	    JMenuItem quit= new JMenuItem("Quit");
+	    JMenuItem newChar = new JMenuItem("New Character");
+	    JMenuItem print = new JMenuItem("Print");
+	    JMenuItem quit = new JMenuItem("Quit");
 	    
 	    file.add(newChar);
 	    newChar.addActionListener(new ListenerNewChar());
-	    file.add(open);
-	    file.add(save);
+	    file.add(print);
+	    print.addActionListener(new ListenerPrint());
 	    file.add(quit);
 	    fileMenu.add(file);
 	    setJMenuBar(fileMenu);
@@ -187,6 +194,12 @@ public class GURPSmain extends JFrame {
 		west.add(attributeInfo);
 		west.add(new JLabel("Advantages:"));
 		west.add(new JScrollPane(advantageList));
+		west.add(addADV);
+		addADV.setEnabled(false);
+		addADV.addActionListener(new addAdvantage());
+		west.add(remADV);
+		remADV.setEnabled(false);
+		remADV.addActionListener(new removeAdvantage());
 		west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
 		
 		add(north, BorderLayout.PAGE_START);
@@ -199,9 +212,6 @@ public class GURPSmain extends JFrame {
 		pack();
 		setResizable(true);
 		setVisible(true);
-
-		// Skapar exempelkaraktären från manualen
-		createCharacter("Dai Blackthorn", 100);
 		
 		// Skapar advantages och lägger till dem i den gemensamma listan.
 		createAdvantage("Absolute Direction" , 
@@ -215,22 +225,9 @@ public class GURPSmain extends JFrame {
 		createAdvantage("Resistant to Poison", "Poison affects you less; +3 "
 				+ "to HT to resist its effects.", 5);
 		createAdvantage("Double-Jointed", "Your body is unusually flexible. "
-				+ "You get a +3 on any Climbing roll, onany roll to escape from "
+				+ "You get a +3 on any Climbing roll, on any roll to escape from "
 				+ "ropes, handcuffs or other restraints, or on any Mechanic roll "
-				+ "(to reach into an engine, of course)", 5);
-		
-		//Hämtar en advantage från den gemensamma listan och ger den till karaktären.
-		addAdvantageToChar("Dai Blackthorn", "Absolute Direction");
-		addAdvantageToChar("Dai Blackthorn", "Double-Jointed");
-		
-		//Tilldela attribut
-//		setCharacterST("Dai Blackthorn", 8);
-//		setCharacterDX("Dai Blackthorn", 15);
-//		setCharacterIQ("Dai Blackthorn", 12);
-//		setCharacterHT("Dai Blackthorn", 12);
-		
-		advantagesDataModel.addSorted("Absolute Direction");
-		advantagesDataModel.addSorted("Double Jointed");
+				+ "(to reach into an engine, of course)", 10);
 	}
 	
     class ListenerNewChar implements ActionListener {
@@ -260,10 +257,18 @@ public class GURPSmain extends JFrame {
 			GURPSmain.HT.setText("10");
 			redHT.setEnabled(true);
 			addHT.setEnabled(true);
+			addADV.setEnabled(true);
+			remADV.setEnabled(true);
 			
 			int parsedPts = Integer.parseInt(charPoints);
 			createCharacter(charName, parsedPts);
 		}
+    }
+    
+    class ListenerPrint implements ActionListener {
+    	public void actionPerformed (ActionEvent ae) {
+    		System.out.println(charMap.get(charName.getText()));
+    	}
     }
 	
 	class ListModel extends DefaultListModel<String>{
@@ -332,27 +337,94 @@ public class GURPSmain extends JFrame {
 		}
 	}
 	
+	public class addAdvantage implements ActionListener {
+		public void actionPerformed(ActionEvent ae) {
+			AdvantagesForm advForm = new AdvantagesForm(advantages);
+			
+			int ans = JOptionPane.showConfirmDialog(GURPSmain.this, advForm);
+			if (ans != JOptionPane.OK_OPTION) {
+				return;
+			}
+			
+			String advantageName = advForm.getName();
+			int advantageCost = advForm.getCost();
+			String recipient = charName.getText();
+			
+			if (charMap.get(recipient).getAdvantages().containsKey(advantageName)) {
+				JOptionPane.showMessageDialog(GURPSmain.this, "You already have that advantage");
+			} else {
+				if (charMap.get(recipient).getPointsUnspent() >= advantageCost) {
+					charMap.get(recipient).setPointsUnspent(charMap.get(recipient).getPointsUnspent()-advantageCost);
+					charMap.get(recipient).addAdvantage(advantageName);
+					updateAdvantageList(recipient);
+				} else {
+					JOptionPane.showMessageDialog(GURPSmain.this, "You don't have enough points");
+				}
+			}
+			disableButtons();
+		}
+	}
+	
+	public class removeAdvantage implements ActionListener {
+		public void actionPerformed(ActionEvent ae) {
+			
+			if (advantageList.getSelectedValue() == null) {
+				JOptionPane.showMessageDialog(GURPSmain.this, "No advantage selected.");
+			} else {
+				String advName = advantageList.getSelectedValue();
+				int advCost = 0;
+				String newUP = "0";
+				
+				advCost = advMap.get(advName).getPointCost();
+				
+				charMap.get(charName.getText()).removeAdvantage(advName);
+				charMap.get(charName.getText()).setPointsUnspent(charMap.get(charName.getText()).getPointsUnspent() + advCost);
+				
+				newUP = Integer.toString(charMap.get(charName.getText()).getPointsUnspent());
+				charUpoints.setText(newUP);
+				
+				advantagesDataModel.remove(advName);
+				
+				disableButtons();
+			}
+		}
+	}
+	
+	public void updateAdvantageList(String name) {
+		 
+		advantagesDataModel.removeAllElements();
+		String recipient = charName.getText();
+		
+		Map<String, Advantage> charAdvantages = new HashMap<String, Advantage>();
+		charAdvantages = charMap.get(name).getAdvantages();
+		
+		if (advantagesDataModel != null) {
+			for (Map.Entry<String, Advantage> entry : charAdvantages.entrySet()) {
+				advantagesDataModel.addSorted(entry.getKey());
+			}
+		}
+	}
 	
 	public void createCharacter(String name, int points) {
 		Character ch = new Character(name, points);
-		characters.add(ch);
+		ch.setStrength(10);
+		ch.setDexterity(10);
+		ch.setIntelligence(10);
+		ch.setHealth(10);
+		ch.setPointsTotal(points);
+		ch.setPointsUnspent(points);
+		charMap.put(name, ch);
+		updateAdvantageList(name);
 	}
 	
 	public void createAdvantage(String name, String description, int pointCost) {
 		Advantage adv = new Advantage(name, description, pointCost);
+		advMap.put(name, adv);
 		advantages.add(adv);
 	}
 	
 	public void addAdvantageToChar(String recipient, String advantage) {
-		for (Character ch : characters) {
-			if (ch.getName().equals(recipient)) {
-				for (Advantage adv : advantages) {
-					if (adv.getName().equals(advantage)) {
-						ch.addAdvantage(advantage);
-					}
-				}
-			}
-		}
+		charMap.get(recipient).addAdvantage(advantage);
 	}
 	
 	public int attributeCost (int value) {
@@ -377,113 +449,123 @@ public class GURPSmain extends JFrame {
 			case 16 : cost = 80; break;
 			case 17 : cost = 100; break;
 			case 18 : cost = 125; break;
+			case 19 : cost = 150; break;
+			case 20 : cost = 175; break;
+			case 21 : cost = 200; break;
+			default : System.out.println("Attribute value error.");
 		}
 		return cost;
 	}
 	
 	public void disableButtons() {
 		
-		for (Character ch : characters) {
-			
-			String newST = Integer.toString(ch.getStrength());
-			String newDX = Integer.toString(ch.getDexterity());
-			String newIQ = Integer.toString(ch.getIntelligence());
-			String newHT = Integer.toString(ch.getHealth());
-			String newPts = Integer.toString(ch.getPointsUnspent());
-			
-			ST.setText(newST);
-			DX.setText(newDX);
-			IQ.setText(newIQ);
-			HT.setText(newHT);
-			charUpoints.setText(newPts);
-			
-			if (ch.getStrength() == 1)
-				redST.setEnabled(false);
-			else
-				redST.setEnabled(true);
-			
-			if (attributeCost(ch.getStrength()+1) - attributeCost(ch.getStrength()) > ch.getPointsUnspent())
-				addST.setEnabled(false);
-			else
-				addST.setEnabled(true);
-			
-			if (ch.getDexterity() == 1)
-				redDX.setEnabled(false);
-			else
-				redDX.setEnabled(true);
-			
-			if (attributeCost(ch.getDexterity()+1) - attributeCost(ch.getDexterity()) > ch.getPointsUnspent())
-				addDX.setEnabled(false);
-			else
-				addDX.setEnabled(true);
-			
-			if (ch.getIntelligence() == 1)
-				redIQ.setEnabled(false);
-			else
-				redIQ.setEnabled(true);
-			
-			if (attributeCost(ch.getIntelligence()+1) - attributeCost(ch.getIntelligence()) > ch.getPointsUnspent())
-				addIQ.setEnabled(false);
-			else
-				addIQ.setEnabled(true);
-			
-			if (ch.getHealth() == 1)
-				redHT.setEnabled(false);
-			else
-				redHT.setEnabled(true);
-			
-			if (attributeCost(ch.getHealth()+1) - attributeCost(ch.getHealth()) > ch.getPointsUnspent())
-				addHT.setEnabled(false);
-			else
-				addHT.setEnabled(true);
-			
-		}
+		Character ch = charMap.get(charName.getText());
+		
+		String newST = Integer.toString(ch.getStrength());
+		String newDX = Integer.toString(ch.getDexterity());
+		String newIQ = Integer.toString(ch.getIntelligence());
+		String newHT = Integer.toString(ch.getHealth());
+		String newPts = Integer.toString(ch.getPointsUnspent());
+		
+		ST.setText(newST);
+		DX.setText(newDX);
+		IQ.setText(newIQ);
+		HT.setText(newHT);
+		charUpoints.setText(newPts);
+		
+		if (ch.getStrength() == 1)
+			redST.setEnabled(false);
+		else
+			redST.setEnabled(true);
+		
+		if (attributeCost(ch.getStrength()+1) - attributeCost(ch.getStrength()) > ch.getPointsUnspent())
+			addST.setEnabled(false);
+		else if (ch.getStrength() >= 20)
+			addST.setEnabled(false);
+		else
+			addST.setEnabled(true);
+		
+		if (ch.getDexterity() == 1)
+			redDX.setEnabled(false);
+		else
+			redDX.setEnabled(true);
+		
+		if (attributeCost(ch.getDexterity()+1) - attributeCost(ch.getDexterity()) > ch.getPointsUnspent())
+			addDX.setEnabled(false);
+		else if (ch.getDexterity() >= 20)
+			addDX.setEnabled(false);
+		else
+			addDX.setEnabled(true);
+		
+		if (ch.getIntelligence() == 1)
+			redIQ.setEnabled(false);
+		else
+			redIQ.setEnabled(true);
+		
+		if (attributeCost(ch.getIntelligence()+1) - attributeCost(ch.getIntelligence()) > ch.getPointsUnspent())
+			addIQ.setEnabled(false);
+		else if (ch.getIntelligence() >= 20)
+			addIQ.setEnabled(false);
+		else
+			addIQ.setEnabled(true);
+		
+		if (ch.getHealth() == 1)
+			redHT.setEnabled(false);
+		else
+			redHT.setEnabled(true);
+		
+		if (attributeCost(ch.getHealth()+1) - attributeCost(ch.getHealth()) > ch.getPointsUnspent())
+			addHT.setEnabled(false);
+		else if (ch.getHealth() >= 20)
+			addHT.setEnabled(false);
+		else
+			addHT.setEnabled(true);
 	}
 	
 	public void decreaseAttribute(String recipient, String attribute) {
-		for (Character ch : characters) {
-			
-			switch(attribute) {
-				case "ST": ch.setStrength(ch.getStrength()-1);
-				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getStrength()) - attributeCost(ch.getStrength()+1)));
-				break;
-				case "DX" : ch.setDexterity(ch.getDexterity()-1); 
-				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getDexterity()) - attributeCost(ch.getDexterity()+1)));
-				break;
-				case "IQ" : ch.setIntelligence(ch.getIntelligence()-1); 
-				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getIntelligence()) - attributeCost(ch.getIntelligence()+1)));
-				break;
-				case "HT" : ch.setHealth(ch.getHealth()-1); 
-				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getHealth()) - attributeCost(ch.getHealth()+1)));
-				break;
-				default : System.out.println("Attribute not found");
-			}
-			
-			disableButtons();
+		Character ch = charMap.get(charName.getText());
+		
+		switch(attribute) {
+			case "ST": ch.setStrength(ch.getStrength()-1);
+			ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getStrength()) - attributeCost(ch.getStrength()+1)));
+			break;
+			case "DX" : ch.setDexterity(ch.getDexterity()-1); 
+			ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getDexterity()) - attributeCost(ch.getDexterity()+1)));
+			break;
+			case "IQ" : ch.setIntelligence(ch.getIntelligence()-1); 
+			ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getIntelligence()) - attributeCost(ch.getIntelligence()+1)));
+			break;
+			case "HT" : ch.setHealth(ch.getHealth()-1); 
+			ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getHealth()) - attributeCost(ch.getHealth()+1)));
+			break;
+			default : System.out.println("Attribute not found");
 		}
+		
+		disableButtons();
+		
 	}
 	
 	public void increaseAttribute(String recipient, String attribute) {
-		for (Character ch : characters) {
-			
-			switch(attribute) {
-				case "ST": ch.setStrength(ch.getStrength()+1);
-				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getStrength()) - attributeCost(ch.getStrength()-1)));
-				break;
-				case "DX" : ch.setDexterity(ch.getDexterity()+1);
-				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getDexterity()) - attributeCost(ch.getDexterity()-1)));
-				break;
-				case "IQ" : ch.setIntelligence(ch.getIntelligence()+1); 
-				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getIntelligence()) - attributeCost(ch.getIntelligence()-1)));
-				break;
-				case "HT" : ch.setHealth(ch.getHealth()+1); 
-				ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getHealth()) - attributeCost(ch.getHealth()-1)));
-				break;
-				default : System.out.println("Attribute not found");
-			}
+		Character ch = charMap.get(recipient);
 		
-			disableButtons();
+		switch(attribute) {
+			case "ST": ch.setStrength(ch.getStrength()+1);
+			ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getStrength()) - attributeCost(ch.getStrength()-1)));
+			break;
+			case "DX" : ch.setDexterity(ch.getDexterity()+1);
+			ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getDexterity()) - attributeCost(ch.getDexterity()-1)));
+			break;
+			case "IQ" : ch.setIntelligence(ch.getIntelligence()+1); 
+			ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getIntelligence()) - attributeCost(ch.getIntelligence()-1)));
+			break;
+			case "HT" : ch.setHealth(ch.getHealth()+1); 
+			ch.setPointsUnspent(ch.getPointsUnspent() - (attributeCost(ch.getHealth()) - attributeCost(ch.getHealth()-1)));
+			break;
+			default : System.out.println("Attribute not found");
 		}
+
+		disableButtons();
+
 	}
 	
 	public void startCombat(String name1, String name2) {
