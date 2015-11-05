@@ -1,7 +1,7 @@
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
+import java.util.ArrayList;
 
 public class CharacterTest {
 
@@ -46,7 +46,7 @@ public class CharacterTest {
 	@Test
 	public void equipItemTest() {
 		Character newChar = new Character("Test", 100);
-		Equipment.Item item = new Item("Ring", 20, 0.0);
+		Equipment.Item item = new Equipment.Item("Ring", 20, 0.0);
 		newChar.equip(item);
 		ArrayList<Equipment.Item> compare = new ArrayList<Equipment.Item>();
 		compare.add(item);
@@ -57,7 +57,7 @@ public class CharacterTest {
 	public void equipAlreadyEquippedItemTest() {
 		// Equippa ett item när det redan är equippat hos en character => fel
 		Character newChar = new Character("Test", 100);
-		Equipment.Item item = new Item("Ring", 20, 0.0);
+		Equipment.Item item = new Equipment.Item("Ring", 20, 0.0);
 		newChar.equip(item);
 		newChar.equip(item);
 	}

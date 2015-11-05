@@ -5,12 +5,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AdvantagesForm extends JPanel {
 	
 	private String name;
 	private int cost;
-	ArrayList<Advantage> advantages = new ArrayList<Advantage>();
+	Map<String, Advantage> advantages = new HashMap<String, Advantage>();
 	ListModel advantagesDataModel = new ListModel();
 	JList<String> advantageList = new JList<String>(advantagesDataModel);
 	JLabel costLabel = new JLabel("Cost : 0");
@@ -20,8 +22,9 @@ public class AdvantagesForm extends JPanel {
 			String newDesc = "";
 			String newCost = "";
 			
-			for (Advantage adv : advantages) {
-				if (adv.getName().equals(advantageList.getSelectedValue())) {
+			for (Map.Entry<String, Advantage> entry : advantages.entrySet()) {
+				if (entry.getKey().equals(advantageList.getSelectedValue())) {
+					Advantage adv = advantages.get(advantageList.getSelectedValue());
 					name = adv.getName();
 					cost = adv.getPointCost();
 					newDesc = adv.getDescription();
@@ -33,7 +36,7 @@ public class AdvantagesForm extends JPanel {
 		}
 	};
 	
-	AdvantagesForm (ArrayList<Advantage> adv) {
+	AdvantagesForm (Map<String, Advantage> adv) {
 		this.advantages = adv;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setPreferredSize(new Dimension(340, 400));
@@ -50,10 +53,10 @@ public class AdvantagesForm extends JPanel {
 		description.setWrapStyleWord(true);
 		add(costLabel);
 		add(description);
-		for (Advantage ad : advantages) {
-			advantagesDataModel.addSorted(ad.getName());
-		}
 		
+		for (Map.Entry<String, Advantage> entry : advantages.entrySet()) {
+			advantagesDataModel.addSorted(entry.getKey());
+		}
 	}
 	
 	class ListModel extends DefaultListModel<String>{

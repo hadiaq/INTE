@@ -11,8 +11,6 @@ public class Character {
 	
 	//Lista �ver advantages som �r aktiva hos denna karakt�r
 	private Map<String, Advantage> advantages = new HashMap<String, Advantage>();
-	public ArrayList<Advantage> charAdvantages = new ArrayList<Advantage>();
-	private ArrayList<Equipment> charEquipment = new ArrayList<Equipment>();
 	private int ptsUnspent;
 	private int st;
 	private int dx;
@@ -21,6 +19,8 @@ public class Character {
 
 	// Lista av karaktärens föremål
 	private ArrayList<Equipment.Item> items = new ArrayList<Equipment.Item>();
+	private ArrayList<Equipment.Item> equipment = new ArrayList<Equipment.Item>();
+
 	
 	public Character(String name, int points) {
 		this.name = name;
@@ -32,29 +32,32 @@ public class Character {
 		this.ht = 10;
 	}
 	
-	// Equippar ett item hos karaktären
 	public void equip(Equipment.Item item) {
-		if (items.contains(item)) {
+		if (equipment.contains(item)) {
 			throw new IllegalArgumentException("Item already equipped"); // Itemet finns redan equippat => fel
 		} else {
-			items.add(item);
+			equipment.add(item);
 		}
 	}
-
-	// Returnerar en *kopia* av listan av alla equippade items
+	
 	public ArrayList<Equipment.Item> getEquippedItemsList() {
-		return new ArrayList<Equipment.Item>(items);
+		return equipment;
 	}
 	
-	//H�mtar advantage ur den gemensamma listan i GURPSmain oh l�gger till i karakt�rens egna lista
+	public ArrayList<Equipment.Item> getItems() {
+		return items;
+	}
+	
+	public void addItem(Equipment.Item item) {
+		items.add(item);
+	}
+	
 	public void addAdvantage(String name) {
 		advantages.put(name, GURPSmain.advMap.get(name));
-
 	}
 	
 	public void removeAdvantage(String name) {
 		advantages.remove(name);
-
 	}
 	
 	public Map<String, Advantage> getAdvantages() {
