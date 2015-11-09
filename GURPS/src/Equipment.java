@@ -59,6 +59,16 @@ public final class Equipment {
 				}
 			}
 		}
+
+		public static class ScaleArmor extends Armor {
+			public ScaleArmor(int techLevel) {
+				super("Scale armor", 750, 50.0, 3, 4, techLevel);
+
+				if (techLevel < 2 || techLevel > 4) {
+					throw new IllegalArgumentException();
+				}
+			}
+		}
 	}
 	
 	public abstract static class Shield extends Item {

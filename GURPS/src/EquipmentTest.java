@@ -110,7 +110,7 @@ public class EquipmentTest {
 		assertEquals(1, leatherJacket.getDamageResistance());
 		assertEquals(8, leatherJacket.getTechLevel());
 	}
-	
+
 	@Test(expected=IllegalArgumentException.class)
 	public void leatherJacketTooHighTechLevelTest() {
 		// TechLevel should be 1-8
@@ -123,6 +123,30 @@ public class EquipmentTest {
 		Equipment.Armor.LeatherJacket leatherJacket = new Equipment.Armor.LeatherJacket(0);
 	}
 	
+	@Test
+	public void scaleArmorConstructorTest() {
+		Equipment.Armor.ScaleArmor scaleArmor = new Equipment.Armor.ScaleArmor(3);
+		
+		assertEquals("Scale armor", scaleArmor.getDescription());
+		assertEquals(750, scaleArmor.getValue());
+		assertEquals(50.0, scaleArmor.getWeight(), DELTA);
+		assertEquals(3, scaleArmor.getPassiveDefense());
+		assertEquals(4, scaleArmor.getDamageResistance());
+		assertEquals(3, scaleArmor.getTechLevel());
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void scaleArmorTooHighTechLevelTest() {
+		// TechLevel should be 2-4
+		Equipment.Armor.ScaleArmor scaleArmor = new Equipment.Armor.ScaleArmor(5);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void scaleArmorTooLowTechLevelTest() {
+		// TechLevel should be 2-4
+		Equipment.Armor.ScaleArmor scaleArmor = new Equipment.Armor.ScaleArmor(1);
+	}
+
 	@Test
 	public void bucklerConstructorTest() {
 		Equipment.Shield.Buckler buckler = new Equipment.Shield.Buckler();
