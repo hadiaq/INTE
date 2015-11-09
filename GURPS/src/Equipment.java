@@ -105,6 +105,8 @@ public final class Equipment {
 			return damageType;
 		}
 		
+		public abstract int calculateWeaponDamage(int damageType);
+
 		public abstract static class HandWeapon extends Weapon {
 			public HandWeapon(String description, int value, double weight, int minimumStrength, int damageType) {
 				super(description, value, weight, minimumStrength, damageType);
@@ -114,11 +116,34 @@ public final class Equipment {
 				public Dagger() {
 					super("Dagger", 20, 0.25, 0, DAMAGE_TYPE_IMPALING);
 				}
+
+				@Override
+				public int calculateWeaponDamage(int damageType) {
+					if (damageType == DAMAGE_TYPE_IMPALING) {
+						// Cutting attack, thr-1 (from weapon table)
+						return -1;
+					} else {
+						throw new IllegalArgumentException();
+					}
+				}
 			}
 			
 			public static class SmallKnife extends HandWeapon {
 				public SmallKnife() {
 					super("Small knife", 30, 0.5, 0, DAMAGE_TYPE_CUTTING & DAMAGE_TYPE_IMPALING);
+				}
+
+				@Override
+				public int calculateWeaponDamage(int attackType) {
+					if (attackType == DAMAGE_TYPE_CUTTING) {
+						// Cutting attack, sw-3 (from weapon table)
+						return -3;
+					} else if (attackType == DAMAGE_TYPE_IMPALING) {
+						// Impaling attack, thr-1 (from weapon table)
+						return -1;
+					} else {
+						throw new IllegalArgumentException();
+					}
 				}
 			}
 		}
