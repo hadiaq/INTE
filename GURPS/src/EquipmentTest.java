@@ -169,4 +169,23 @@ public class EquipmentTest {
 		assertEquals(-3, smallKnife.calculateWeaponDamage(Equipment.Weapon.DAMAGE_TYPE_CUTTING));
 		assertEquals(-1, smallKnife.calculateWeaponDamage(Equipment.Weapon.DAMAGE_TYPE_IMPALING));
 	}
+
+	@Test
+	public void shortswordConstructorTest() {
+		Equipment.Weapon.HandWeapon.Shortsword shortsword = new Equipment.Weapon.HandWeapon.Shortsword();
+
+		assertEquals("Shortsword", shortsword.getDescription());
+		assertEquals(400, shortsword.getValue());
+		assertEquals(2.0, shortsword.getWeight(), DELTA);
+		assertEquals(7, shortsword.getMinimumStrength());
+		assertEquals(Equipment.Weapon.DAMAGE_TYPE_CUTTING & Equipment.Weapon.DAMAGE_TYPE_IMPALING, shortsword.getDamageType());
+	}
+
+	@Test
+	public void shortswordCalculateWeaponDamageTest() {
+		Equipment.Weapon.HandWeapon.Shortsword shortsword = new Equipment.Weapon.HandWeapon.Shortsword();
+
+		assertEquals(0, shortsword.calculateWeaponDamage(Equipment.Weapon.DAMAGE_TYPE_CUTTING));
+		assertEquals(0, shortsword.calculateWeaponDamage(Equipment.Weapon.DAMAGE_TYPE_IMPALING));
+	}
 }

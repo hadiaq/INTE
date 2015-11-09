@@ -200,7 +200,7 @@ public final class Equipment {
 						return new DiceRoll(3, 2);
 					}
 				}
-				
+
 				return null;
 			}
 		}	
@@ -241,6 +241,25 @@ public final class Equipment {
 					} else if (attackType == DAMAGE_TYPE_IMPALING) {
 						// Impaling attack, thr-1 (from weapon table)
 						return -1;
+					} else {
+						throw new IllegalArgumentException();
+					}
+				}
+			}
+
+			public static class Shortsword extends HandWeapon {
+				public Shortsword() {
+					super("Shortsword", 400, 2.0, 7, DAMAGE_TYPE_CUTTING & DAMAGE_TYPE_IMPALING);
+				}
+
+				@Override
+				public int calculateWeaponDamage(int attackType) {
+					if (attackType == DAMAGE_TYPE_CUTTING) {
+						// Cutting attack, sw+0 (from weapon table)
+						return 0;
+					} else if (attackType == DAMAGE_TYPE_IMPALING) {
+						// Impaling attack, thr+0 (from weapon table)
+						return 0;
 					} else {
 						throw new IllegalArgumentException();
 					}
