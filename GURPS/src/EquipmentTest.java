@@ -5,6 +5,72 @@ public class EquipmentTest {
 	private static final double DELTA = 1e-15; // Behövs för assertEquals(double, double, double)
 
 	@Test
+	public void calculateBasicThrustingWeaponDamageTest() {
+		DiceRoll[] basicThrustingWeaponDamageDiceRolls = {
+			new DiceRoll(0, 0),
+			new DiceRoll(0, 0),
+			new DiceRoll(0, 0),
+			new DiceRoll(0, 0),
+			new DiceRoll(1, -5),
+			new DiceRoll(1, -4),
+			new DiceRoll(1, -3),
+			new DiceRoll(1, -3),
+			new DiceRoll(1, -2),
+			new DiceRoll(1, -2),
+			new DiceRoll(1, -1),
+			new DiceRoll(1, -1),
+			new DiceRoll(1, 0),
+			new DiceRoll(1, 0),
+			new DiceRoll(1, 1),
+			new DiceRoll(1, 1),
+			new DiceRoll(1, 2),
+			new DiceRoll(1, 2),
+			new DiceRoll(2, -1),
+			new DiceRoll(2, -1)
+		};
+
+		for (int strength = 1; strength < 20; strength++) {
+			DiceRoll compare = Equipment.Weapon.calculateBasicWeaponDamage(strength, Equipment.Weapon.AttackType.THRUSTING);
+		
+			assertEquals(basicThrustingWeaponDamageDiceRolls[strength-1].getNumberOfDices(), compare.getNumberOfDices());
+			assertEquals(basicThrustingWeaponDamageDiceRolls[strength-1].getModifier(), compare.getModifier());
+		}
+	}
+
+	@Test
+	public void calculateBasicSwingingWeaponDamageTest() {
+		DiceRoll[] basicSwingingWeaponDamageDiceRolls = {
+			new DiceRoll(0, 0),
+			new DiceRoll(0, 0),
+			new DiceRoll(0, 0),
+			new DiceRoll(0, 0),
+			new DiceRoll(1, -5),
+			new DiceRoll(1, -4),
+			new DiceRoll(1, -3),
+			new DiceRoll(1, -2),
+			new DiceRoll(1, -1),
+			new DiceRoll(1, 0),
+			new DiceRoll(1, 1),
+			new DiceRoll(1, 2),
+			new DiceRoll(2, -1),
+			new DiceRoll(2, 0),
+			new DiceRoll(2, 1),
+			new DiceRoll(2, 2),
+			new DiceRoll(3, -1),
+			new DiceRoll(3, 0),
+			new DiceRoll(3, 1),
+			new DiceRoll(3, 2)
+		};
+
+		for (int strength = 1; strength < 20; strength++) {
+			DiceRoll compare = Equipment.Weapon.calculateBasicWeaponDamage(strength, Equipment.Weapon.AttackType.SWINGING);
+		
+			assertEquals(basicSwingingWeaponDamageDiceRolls[strength-1].getNumberOfDices(), compare.getNumberOfDices());
+			assertEquals(basicSwingingWeaponDamageDiceRolls[strength-1].getModifier(), compare.getModifier());
+		}
+	}
+
+	@Test
 	public void itemConstructorTest() {
 		Equipment.Item ring = new Equipment.Item("Ring", 20, 0.0);
 		
