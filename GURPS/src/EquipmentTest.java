@@ -37,6 +37,26 @@ public class EquipmentTest {
 		}
 	}
 
+	@Test(expected=IllegalArgumentException.class)
+	public void calculateBasicThrustingWeaponDamageZeroOrNegativeStrengthTest() {
+		DiceRoll diceRoll = Equipment.Weapon.calculateBasicWeaponDamage(0, Equipment.Weapon.AttackType.THRUSTING);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void calculateBasicSwingingWeaponDamageZeroOrNegativeStrengthTest() {
+		DiceRoll diceRoll = Equipment.Weapon.calculateBasicWeaponDamage(0, Equipment.Weapon.AttackType.SWINGING);
+	}
+	
+	@Test // Ej definerat när strength > 20 (se tabellen på sidan 18)
+	public void calculateBasicThrustingWeaponDamageStrengthOver20Test() {
+		assertNull(Equipment.Weapon.calculateBasicWeaponDamage(21, Equipment.Weapon.AttackType.THRUSTING));
+	}
+	
+	@Test // Ej definerat när strength > 20 (se tabellen på sidan 18)
+	public void calculateBasicSwingingWeaponDamageStrengthOver20Test() {
+		assertNull(Equipment.Weapon.calculateBasicWeaponDamage(21, Equipment.Weapon.AttackType.SWINGING));
+	}
+
 	@Test
 	public void calculateBasicSwingingWeaponDamageTest() {
 		DiceRoll[] basicSwingingWeaponDamageDiceRolls = {

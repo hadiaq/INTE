@@ -199,10 +199,8 @@ public final class Equipment {
 					} else if (attackType == AttackType.SWINGING) {
 						return new DiceRoll(3, 2);
 					}
-				} else {
-					return null;
 				}
-
+				
 				return null;
 			}
 		}	
