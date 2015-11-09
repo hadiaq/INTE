@@ -6,6 +6,10 @@ public class DiceRoll {
 	private int value; // 2d-5
 
 	public DiceRoll(int numberOfDices, int modifier) {
+		if (numberOfDices < 0) {
+			throw new IllegalArgumentException();
+		}
+		
 		this.numberOfDices = numberOfDices;
 		this.modifier = modifier;
 		dices = new Die[numberOfDices];
