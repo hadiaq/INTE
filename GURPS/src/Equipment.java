@@ -79,6 +79,12 @@ public final class Equipment {
 				super("Buckler", 25, 2.0, 1);
 			}
 		}
+
+		public static class SmallShield extends Shield {
+			public SmallShield() {
+				super("Small shield", 40, 8.0, 2);
+			}
+		}
 	}
 	
 	public abstract static class Weapon extends Item {

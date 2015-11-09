@@ -134,6 +134,16 @@ public class EquipmentTest {
 	}
 	
 	@Test
+	public void smallShieldConstructorTest() {
+		Equipment.Shield.SmallShield smallShield = new Equipment.Shield.SmallShield();
+
+		assertEquals("Small shield", smallShield.getDescription());
+		assertEquals(40, smallShield.getValue());
+		assertEquals(8.0, smallShield.getWeight(), DELTA);
+		assertEquals(2, smallShield.getPassiveDefense());
+	}
+	
+	@Test
 	public void daggerConstructorTest() {
 		Equipment.Weapon.HandWeapon.Dagger dagger = new Equipment.Weapon.HandWeapon.Dagger();
 		
