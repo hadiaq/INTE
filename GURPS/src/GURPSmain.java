@@ -261,8 +261,8 @@ public class GURPSmain extends JFrame {
 				+ "ropes, handcuffs or other restraints, or on any Mechanic roll "
 				+ "(to reach into an engine, of course)", 10);
 		
-		createItem("Sword", 25, 7.8);
-		createItem("Potion", 5, 1.8);
+		createShortsword();
+		createDagger();
 		createBuckler();
 		createSmallShield();
 		createScaleArmor();
@@ -456,13 +456,31 @@ public class GURPSmain extends JFrame {
 	
 	public class equipItem implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
-			
+			Equipment.Item eqItem = null;
+			for (Equipment.Item it : items) {
+				if (it.getDescription().equals(itemList.getSelectedValue())) {
+					eqItem = it;
+				}
+			}
+			try {
+				charMap.get(charName.getText()).equip(eqItem);
+			} catch (IllegalArgumentException iae) {
+				JOptionPane.showMessageDialog(GURPSmain.this, "Item already Equipped");
+			}
+			refresh();
 		}
 	}
 	
 	public class unequipItem implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
-			
+			Equipment.Item eqItem = null;
+			for (Equipment.Item it : items) {
+				if (it.getDescription().equals(equipmentList.getSelectedValue())) {
+					eqItem = it;
+				}
+			}
+			charMap.get(charName.getText()).unequip(eqItem);
+			refresh();
 		}
 	}
 	
@@ -502,6 +520,16 @@ public class GURPSmain extends JFrame {
 	public void createScaleArmor() {
 		Equipment.Armor.ScaleArmor scaleArmor = new Equipment.Armor.ScaleArmor(3);
 		items.add(scaleArmor);
+	}
+	
+	public void createShortsword() {
+		Equipment.Weapon.HandWeapon.Shortsword shortsword = new Equipment.Weapon.HandWeapon.Shortsword();
+		items.add(shortsword);
+	}
+	
+	public void createDagger() {
+		Equipment.Weapon.HandWeapon.Dagger dagger = new Equipment.Weapon.HandWeapon.Dagger();
+		items.add(dagger);
 	}
 	
 	//Metod som används för att beräkna kostnad för att öka/minska attribut
