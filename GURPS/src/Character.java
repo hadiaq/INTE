@@ -40,6 +40,10 @@ public class Character {
 		}
 	}
 	
+	public void unequip(Equipment.Item item) {
+		equipment.remove(item);
+	}
+	
 	public ArrayList<Equipment.Item> getEquippedItemsList() {
 		return equipment;
 	}
