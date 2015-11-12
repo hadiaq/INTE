@@ -263,6 +263,10 @@ public class GURPSmain extends JFrame {
 		
 		createItem("Sword", 25, 7.8);
 		createItem("Potion", 5, 1.8);
+		createBuckler();
+		createSmallShield();
+		createScaleArmor();
+		
 	}
 	
 	//Knapp för att skapa ny karaktär
@@ -277,30 +281,33 @@ public class GURPSmain extends JFrame {
 			
 			String charName = charForm.getName();
 			String charPoints = charForm.getPoints();
-			
-			GURPSmain.charName.setText(charName);
-			GURPSmain.charPoints.setText(charPoints);
-			GURPSmain.charUpoints.setText(charPoints);
-			GURPSmain.ST.setText("10");
-			redST.setEnabled(true);
-			addST.setEnabled(true);
-			GURPSmain.DX.setText("10");
-			redDX.setEnabled(true);
-			addDX.setEnabled(true);
-			GURPSmain.IQ.setText("10");
-			redIQ.setEnabled(true);
-			addIQ.setEnabled(true);
-			GURPSmain.HT.setText("10");
-			redHT.setEnabled(true);
-			addHT.setEnabled(true);
-			addADV.setEnabled(true);
-			remADV.setEnabled(true);
-			addItem.setEnabled(true);
-			equipItem.setEnabled(true);
-			unequipItem.setEnabled(true);
-			
-			int parsedPts = Integer.parseInt(charPoints);
-			createCharacter(charName, parsedPts);
+			try {
+				Integer.parseInt(charPoints);
+				GURPSmain.charName.setText(charName);
+				GURPSmain.charPoints.setText(charPoints);
+				GURPSmain.charUpoints.setText(charPoints);
+				GURPSmain.ST.setText("10");
+				redST.setEnabled(true);
+				addST.setEnabled(true);
+				GURPSmain.DX.setText("10");
+				redDX.setEnabled(true);
+				addDX.setEnabled(true);
+				GURPSmain.IQ.setText("10");
+				redIQ.setEnabled(true);
+				addIQ.setEnabled(true);
+				GURPSmain.HT.setText("10");
+				redHT.setEnabled(true);
+				addHT.setEnabled(true);
+				addADV.setEnabled(true);
+				remADV.setEnabled(true);
+				addItem.setEnabled(true);
+				equipItem.setEnabled(true);
+				unequipItem.setEnabled(true);
+				int parsedPts = Integer.parseInt(charPoints);
+				createCharacter(charName, parsedPts);
+			} catch (NumberFormatException nfe) {
+				JOptionPane.showMessageDialog(GURPSmain.this,  "Invalid point entry.");
+			}
 		}
     }
     
@@ -480,6 +487,21 @@ public class GURPSmain extends JFrame {
 	public void createItem(String description, int value, double weight) {
 		Equipment.Item item = new Equipment.Item(description, value, weight);
 		items.add(item);
+	}
+	
+	public void createBuckler() {
+		Equipment.Shield.Buckler buckler = new Equipment.Shield.Buckler();
+		items.add(buckler);
+	}
+	
+	public void createSmallShield() {
+		Equipment.Shield.SmallShield smallShield = new Equipment.Shield.SmallShield();
+		items.add(smallShield);
+	}
+	
+	public void createScaleArmor() {
+		Equipment.Armor.ScaleArmor scaleArmor = new Equipment.Armor.ScaleArmor(3);
+		items.add(scaleArmor);
 	}
 	
 	//Metod som används för att beräkna kostnad för att öka/minska attribut

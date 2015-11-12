@@ -46,7 +46,7 @@ public class ItemsForm extends JPanel {
 		itemList.setPreferredSize(new Dimension(280, 200));
 		itemList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		itemList.addMouseListener(mouseList);
-		add(new JLabel("Available advantages:"));
+		add(new JLabel("Available items:"));
 		add(new JScrollPane(itemList));
 		description.setSize(300, 300);
 		description.setEditable(false);
