@@ -249,7 +249,7 @@ public class GURPSmain extends JFrame {
 		setResizable(true);
 		setVisible(true); //GUI
 		
-		// Skapar advantages och l‰gger till dem i den gemensamma listan.
+		// Skapar advantages och l√§gger till dem i den gemensamma listan.
 		createAdvantage("Absolute Direction" , 
 				"You always know which way is north, and you can always "
 				+ "re-trace a path you have followed within the past month, "
@@ -273,7 +273,7 @@ public class GURPSmain extends JFrame {
 		
 	}
 	
-	//Knapp fˆr att skapa ny karakt‰r
+	//Knapp f√∂r att skapa ny karakt√§r
     class ListenerNewChar implements ActionListener {
 		public void actionPerformed (ActionEvent ave) {
 			CharacterForm charForm = new CharacterForm();
@@ -321,7 +321,7 @@ public class GURPSmain extends JFrame {
     	}
     }
 	
-    //Sorteringsmodell fˆr advantages och items
+    //Sorteringsmodell f√∂r advantages och items
 	class ListModel extends DefaultListModel<String>{
 		
 		public void addSorted(String addNew){
@@ -388,7 +388,7 @@ public class GURPSmain extends JFrame {
 		}
 	} // Plus- och minusknappar
 	
-	//L‰gger till en advantage till karakt‰ren
+	//L√§gger till en advantage till karakt√§ren
 	public class addAdvantage implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			AdvantagesForm advForm = new AdvantagesForm(advMap);
@@ -417,7 +417,7 @@ public class GURPSmain extends JFrame {
 		}
 	}
 	
-	//Tar bort en advantage frÂn karakt‰rn
+	//Tar bort en advantage fr√•n karakt√§rn
 	public class removeAdvantage implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			
@@ -443,7 +443,7 @@ public class GURPSmain extends JFrame {
 		}
 	}
 	
-	//L‰gger till ett item till karakt‰ren
+	//L√§gger till ett item till karakt√§ren
 	public class addItem implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			ItemsForm itemForm = new ItemsForm(items);
@@ -488,7 +488,7 @@ public class GURPSmain extends JFrame {
 		}
 	}
 	
-	//Skapar ny karakt‰r
+	//Skapar ny karakt√§r
 	public void createCharacter(String name, int points) {
 		Character ch = new Character(name, points);
 		ch.setStrength(10);
@@ -511,7 +511,6 @@ public class GURPSmain extends JFrame {
 		items.add(item);
 	}
 	
-<<<<<<< HEAD
 	public static Equipment.Shield createShield(String description, int value, double weight, int passiveDefence){
 		if(description == null)
 			throw new IllegalArgumentException();
@@ -525,8 +524,8 @@ public class GURPSmain extends JFrame {
 		Equipment.Shield sh = new Equipment.Shield(description, value, weight, passiveDefence);
 		items.add(sh);
 		return sh;
-		
-=======
+	}
+
 	public void createBuckler() {
 		Equipment.Shield.Buckler buckler = new Equipment.Shield.Buckler();
 		items.add(buckler);
@@ -550,10 +549,9 @@ public class GURPSmain extends JFrame {
 	public void createDagger() {
 		Equipment.Weapon.HandWeapon.Dagger dagger = new Equipment.Weapon.HandWeapon.Dagger();
 		items.add(dagger);
->>>>>>> origin/master
 	}
 	
-	//Metod som anv‰nds fˆr att ber‰kna kostnad fˆr att ˆka/minska attribut
+	//Metod som anv√§nds f√∂r att ber√§kna kostnad f√∂r att √∂ka/minska attribut
 	public int attributeCost (int value) {
 		int cost = 0;
 		switch (value) {
@@ -584,7 +582,7 @@ public class GURPSmain extends JFrame {
 		return cost;
 	}
 	
-	//Uppdaterar listor och tillg‰ngliga knappar
+	//Uppdaterar listor och tillg√§ngliga knappar
 	public void refresh() {
 		
 		Character ch = charMap.get(charName.getText());
@@ -694,7 +692,7 @@ public class GURPSmain extends JFrame {
 		
 	}
 	
-	//÷kar ett attribut med 1
+	//√ñkar ett attribut med 1
 	public void increaseAttribute(String recipient, String attribute) {
 		Character ch = charMap.get(recipient);
 		
@@ -718,7 +716,7 @@ public class GURPSmain extends JFrame {
 
 	}
 	
-	//Startar en instans av Combat mellan nuvarande karakt‰r och exempelkarakt‰ren
+	//Startar en instans av Combat mellan nuvarande karakt√§r och exempelkarakt√§ren
 	public void startCombat(String name1, String name2) {
 		Character char1 = charMap.get(charName.getText());
 		Character char2 = charMap.get("Dai Blackthorn");
