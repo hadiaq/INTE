@@ -8,7 +8,7 @@ public class CharacterTest {
 	@Test
 	public void constructorTest() {
 		Character newChar = new Character("Test", 100);
-		assertEquals(Character.State.Idle, newChar.getState());
+		assertEquals(Character.State.Passive, newChar.getState());
 		assertEquals(10, newChar.getStrength());
 		assertEquals(10, newChar.getDexterity());
 		assertEquals(10, newChar.getIntelligence());
@@ -45,18 +45,6 @@ public class CharacterTest {
 	}
 
 	@Test
-	public void isAttackingTest() {
-		Character newChar = new Character("Test", 100);
-		assertNotEquals(Character.State.Attacking, newChar.getState());
-	}
-
-	@Test
-	public void isParryingTest() {
-		Character newChar = new Character("Test", 100);
-		assertNotEquals(Character.State.Parrying, newChar.getState());
-	}
-
-	@Test
 	public void equipItemTest() {
 		Character newChar = new Character("Test", 100);
 		Equipment.Item item = new Equipment.Item("Ring", 20, 0.0);
@@ -73,5 +61,37 @@ public class CharacterTest {
 		Equipment.Item item = new Equipment.Item("Ring", 20, 0.0);
 		newChar.equip(item);
 		newChar.equip(item);
+	}
+
+	@Test
+	public void attackStateTest() {
+		Character attacker = new Character("Attacker", 100);
+		Character victim = new Character("Victim", 100);
+		attacker.attack(victim);
+		assertEquals(Character.State.Attacking, attacker.getState());
+	}
+
+	@Test
+	public void parryStateTest() {
+		Character attacker = new Character("Attacker", 100);
+		Character victim = new Character("Victim", 100);
+		victim.parry(attacker);
+		assertEquals(Character.State.Parrying, victim.getState());
+	}
+
+	@Test
+	public void dodgeStateTest() {
+		Character attacker = new Character("Attacker", 100);
+		Character victim = new Character("Victim", 100);
+		victim.dodge(attacker);
+		assertEquals(Character.State.Dodging, victim.getState());
+	}
+
+	@Test
+	public void blockStateTest() {
+		Character attacker = new Character("Attacker", 100);
+		Character victim = new Character("Victim", 100);
+		victim.block(attacker);
+		assertEquals(Character.State.Blocking, victim.getState());
 	}
 }

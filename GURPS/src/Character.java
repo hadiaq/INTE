@@ -22,8 +22,8 @@ public class Character {
 	private ArrayList<Equipment.Item> equipment = new ArrayList<Equipment.Item>();
 
 	// Karaktärstillstånd
-	enum State {
-		Idle, Attacking, Parrying
+	public enum State {
+		Passive, Attacking, Blocking, Parrying, Dodging
 	}
 
 	private State state;
@@ -32,7 +32,7 @@ public class Character {
 		this.name = name;
 		this.ptsTotal = points;
 		this.ptsUnspent = points;
-		this.state = State.Idle;
+		this.state = State.Passive;
 		this.st = 10;
 		this.dx = 10;
 		this.iq = 10;
@@ -43,16 +43,44 @@ public class Character {
 		return state;
 	}
 
-	public boolean isIdle() {
-		return state == State.Idle;
+	void setState(State state) {
+		this.state = state;
+	}
+
+	public boolean isPassive() {
+		return state == State.Passive;
 	}
 
 	public boolean isAttacking() {
 		return state == State.Attacking;
 	}
 
+	public boolean isBlocking() {
+		return state == State.Blocking;
+	}
+
 	public boolean isParrying() {
 		return state == State.Parrying;
+	}
+
+	public boolean isDodging() {
+		return state == State.Dodging;
+	}
+
+	void attack(Character victim) {
+		setState(State.Attacking);
+	}
+	
+	void parry(Character attacker) {
+		setState(State.Parrying);
+	}
+
+	void dodge(Character attacker) {
+		setState(State.Dodging);
+	}
+
+	void block(Character attacker) {
+		setState(State.Blocking);
 	}
 
 	public void equip(Equipment.Item item) {
