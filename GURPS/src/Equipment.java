@@ -88,6 +88,7 @@ public final class Equipment {
 			return passiveDefense;
 		}
 		
+		
 		public static class Buckler extends Shield {
 			public Buckler() {
 				super("Buckler", 25, 2.0, 1);

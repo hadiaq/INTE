@@ -9,6 +9,8 @@ import javax.swing.*;
 
 
 
+
+
 public class GURPSmain extends JFrame {
 	
 	public static Map<String, Character> charMap = new HashMap<String, Character>();
@@ -484,7 +486,7 @@ public class GURPSmain extends JFrame {
 		items.add(item);
 	}
 	
-	public void createShield(String description, int value, double weight, int passiveDefence){
+	public static Equipment.Shield createShield(String description, int value, double weight, int passiveDefence){
 		if(description == null)
 			throw new IllegalArgumentException();
 		if(value <0)
@@ -496,6 +498,7 @@ public class GURPSmain extends JFrame {
 		
 		Equipment.Shield sh = new Equipment.Shield(description, value, weight, passiveDefence);
 		items.add(sh);
+		return sh;
 		
 	}
 	
