@@ -7,6 +7,8 @@ import java.io.File;
 
 import javax.swing.*;
 
+
+
 public class GURPSmain extends JFrame {
 	
 	public static Map<String, Character> charMap = new HashMap<String, Character>();
@@ -480,6 +482,21 @@ public class GURPSmain extends JFrame {
 	public void createItem(String description, int value, double weight) {
 		Equipment.Item item = new Equipment.Item(description, value, weight);
 		items.add(item);
+	}
+	
+	public void createShield(String description, int value, double weight, int passiveDefence){
+		if(description == null)
+			throw new IllegalArgumentException();
+		if(value <0)
+			throw new IllegalArgumentException();
+		if(weight <=0)
+			throw new IllegalArgumentException();
+		if(passiveDefence <0)
+			throw new IllegalArgumentException();
+		
+		Equipment.Shield sh = new Equipment.Shield(description, value, weight, passiveDefence);
+		items.add(sh);
+		
 	}
 	
 	//Metod som används för att beräkna kostnad för att öka/minska attribut

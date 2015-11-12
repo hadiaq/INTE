@@ -1,7 +1,9 @@
 
+
 public final class Equipment {
 	
 	public static class Item {
+
 		private String description; // t.ex. "Chainmail", "Flail"
 		private int value;
 		private double weight;
@@ -24,6 +26,8 @@ public final class Equipment {
 			return weight;
 		}
 	}
+	
+	
 	
 	public abstract static class Armor extends Item {
 		private int passiveDefense;
@@ -71,7 +75,7 @@ public final class Equipment {
 		}
 	}
 	
-	public abstract static class Shield extends Item {
+	public static class Shield extends Item {
 		private int passiveDefense;
 		
 		public Shield(String description, int value, double weight, int passiveDefense) {
