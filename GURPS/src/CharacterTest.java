@@ -8,6 +8,7 @@ public class CharacterTest {
 	@Test
 	public void constructorTest() {
 		Character newChar = new Character("Test", 100);
+		assertEquals(Character.State.Idle, newChar.getState());
 		assertEquals(10, newChar.getStrength());
 		assertEquals(10, newChar.getDexterity());
 		assertEquals(10, newChar.getIntelligence());
@@ -42,7 +43,19 @@ public class CharacterTest {
 		newChar.setHealth(13);
 		assertEquals(13, newChar.getHealth());
 	}
-	
+
+	@Test
+	public void isAttackingTest() {
+		Character newChar = new Character("Test", 100);
+		assertNotEquals(Character.State.Attacking, newChar.getState());
+	}
+
+	@Test
+	public void isParryingTest() {
+		Character newChar = new Character("Test", 100);
+		assertNotEquals(Character.State.Parrying, newChar.getState());
+	}
+
 	@Test
 	public void equipItemTest() {
 		Character newChar = new Character("Test", 100);

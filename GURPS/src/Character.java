@@ -21,17 +21,40 @@ public class Character {
 	private ArrayList<Equipment.Item> items = new ArrayList<Equipment.Item>();
 	private ArrayList<Equipment.Item> equipment = new ArrayList<Equipment.Item>();
 
-	
+	// Karaktärstillstånd
+	enum State {
+		Idle, Attacking, Parrying
+	}
+
+	private State state;
+
 	public Character(String name, int points) {
 		this.name = name;
 		this.ptsTotal = points;
 		this.ptsUnspent = points;
+		this.state = State.Idle;
 		this.st = 10;
 		this.dx = 10;
 		this.iq = 10;
 		this.ht = 10;
 	}
 	
+	public State getState() {
+		return state;
+	}
+
+	public boolean isIdle() {
+		return state == State.Idle;
+	}
+
+	public boolean isAttacking() {
+		return state == State.Attacking;
+	}
+
+	public boolean isParrying() {
+		return state == State.Parrying;
+	}
+
 	public void equip(Equipment.Item item) {
 		if (equipment.contains(item)) {
 			throw new IllegalArgumentException("Item already equipped"); // Itemet finns redan equippat => fel
