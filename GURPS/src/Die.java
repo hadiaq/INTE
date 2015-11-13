@@ -12,11 +12,6 @@ public class Die {
 		this.value = ran.nextInt(MAX_VALUE) +1;
 	}
 	
-	public Die(int seed) {
-		Random ran = new Random(seed);
-		this.value = ran.nextInt(MAX_VALUE) +1;
-	}
-	
 	public int getValue() {
 		return value;
 	}
@@ -27,8 +22,4 @@ public class Die {
 		
 	}
 	
-	public void seedRoll(int seed) {
-		Random ran = new Random();
-		value = ran.nextInt(MAX_VALUE) +1;
-	}
 }
