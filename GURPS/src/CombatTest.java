@@ -18,7 +18,7 @@ public class CombatTest {
 	}
 	
 	@Test
-	public void combatTurnTest() {
+	public void CombatTurnTest() {
 		
 		Equipment.Item sword = new Equipment.Weapon.HandWeapon.Shortsword();
 		atk.addItem(sword);
