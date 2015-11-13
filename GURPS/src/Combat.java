@@ -131,4 +131,59 @@ public class Combat {
 		}
 	}
 	
+	/*
+	 
+	public Combat (Character char1, Character char2) {
+		this.char1 = char1;
+		this.char2 = char2;
+		
+		public void startCombat() {
+			if (char1.getMovementSpeed() > char2.getMovementSpeed()) {
+				combatTurn turn = new combatTurn(char1, char2);
+				
+			} else if (char2.getMovementSpeed() > char1.getMovementSpeed()) {
+				combatTurn turn = new combatTurn(char2, char1);
+			} else {
+				//slå tärning om vem som börjar
+			}
+		}
+		
+		private boolean combatTurn(Character c1, Character c2) {
+			boolean endTurn = false;
+			
+			while (endTurn == false) {
+				switch (command) {
+					case "attack":
+					// c1 attackerar c2
+					// kontrollera om c2 har valt AOdefense
+					// c2 väljer parry/block/dodge
+					
+					case "escape":
+					// end combat
+					
+					case "AOattack":
+					// attackera med +4
+					// state = AOattack
+					// kontrollera om c2 har valt AOdefense
+					// c2 väljer dodge/parry/block
+					
+					case "AOdefense":
+					// state = AOdefense
+					
+					default:
+					System.out.println("Unknown command");
+				}
+				
+				endTurn = true;
+			}
+			
+			if (c1.getHealth > 0 %% c2.getHealth > 0) {
+				combatTurn nextTurn = new combatTurn(c1, c2)
+			}
+		}
+	}
+	 
+	 
+	 */
+	
 }
