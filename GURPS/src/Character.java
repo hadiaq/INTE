@@ -3,7 +3,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
 
-import Equipment.Weapon;
 
 public class Character {
 	
@@ -123,6 +122,10 @@ public class Character {
 	
 	public String getName(){
 		return this.name;
+	}
+	
+	public double getMovementSpeed(){
+		return (this.dx+this.ht)/4;
 	}
 	
 	public void setName(String name) {
