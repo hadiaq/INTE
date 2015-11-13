@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import Equipment.Weapon.AttackType;
-
 
 public class Combat {
 	static int totalRoll;
@@ -9,15 +7,13 @@ public class Combat {
 	private Character char1;
 	private Character char2;
 	private ArrayList<CombatTurn> turns = new ArrayList<CombatTurn>();
-	//Gick på str pga att attackskill ej är implementerat men ville kunna göra koden möjlig ändå
-	//Jag har även ignorerat turordning tillsvidare
 	
 	public Combat (Character char1, Character char2) {
 		this.char1 = char1;
 		this.char2 = char2;
 		while (char1.getHealth() > 0 && char2.getHealth() > 0) {
 			
-			for (int turnCounter = 0; turnCounter<300 ; turnCounter++) {
+			for (int turnCounter = 0; turnCounter<50 ; turnCounter++) {
 				if (turnCounter%2 == 0) {
 					CombatTurn even = new CombatTurn(char1, char2, turnCounter);
 					turns.add(even);
@@ -31,29 +27,64 @@ public class Combat {
 	
 	public static class CombatTurn {
 		private int turnCount;
-		private Character attacker;
-		private Character defender;
+		private static Character attacker;
+		private static Character defender;
+		private boolean avoided;
 		public CombatTurn (Character attacker, Character defender, int turnCount) {
 			this.attacker = attacker;
 			this.defender = defender;
 			this.turnCount = turnCount;
 			
-			Equipment.Weapon weapon = attacker.getWeapon();
-			DiceRoll diceRoll = weapon.calculateBasicWeaponDamage(attacker.getStrength(), Equipment.Weapon.AttackType.SWINGING);
-			int damage = diceRoll.getValue();
-			
 			if (defender.isBlocking()) {
-				//block beräkning
+				ArrayList<Equipment.Item> equipped = new ArrayList<Equipment.Item>(defender.getEquippedItemsList());
+				for (Equipment.Item eq : equipped) {
+					if (eq instanceof Equipment.Shield) {
+						DiceRoll dr = new DiceRoll(3,0);
+						if (dr.getValue() <= 7) {
+							avoided = true;
+						}
+					}
+				}
 			} else if (defender.isParrying()) {
-				//parry beräkning
+				ArrayList<Equipment.Item> equipped = new ArrayList<Equipment.Item>(defender.getEquippedItemsList());
+				for (Equipment.Item eq : equipped) {
+					if (eq instanceof Equipment.Weapon.HandWeapon) {
+						DiceRoll dr = new DiceRoll(2,0);
+						if (dr.getValue() <= 5) {
+							avoided = true;
+						}
+					}
+				}
 			} else if (defender.isDodging()) {
-				//dodge beräkning
+				DiceRoll dr = new DiceRoll(2,0);
+				if (dr.getValue() <= defender.getDexterity()/2) {
+					avoided = true;
+				}
 			} else {
-				//skada
+				avoided = false;
 			}
 				
 			
 		}
+		
+		public static DiceRoll getAttackerDiceRoll (Character atk) {
+			Equipment.Weapon weapon = attacker.getWeapon();
+			DiceRoll diceRoll = weapon.calculateBasicWeaponDamage(attacker.getStrength(), Equipment.Weapon.AttackType.SWINGING);
+			return diceRoll;
+		}
+		
+		public int calculateDamage(DiceRoll dr) {
+			int damage = getAttackerDiceRoll(attacker).getValue();
+			return damage;
+		}
+		
+		public void dealDamage (Character def) {
+			if(avoided == false) {
+				def.setHealth(def.getHealth()-calculateDamage(getAttackerDiceRoll(attacker)));
+			}
+		}
+		
+		
 		
 	}
 	
