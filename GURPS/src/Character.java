@@ -3,6 +3,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
 
+import Equipment.Weapon;
+
 public class Character {
 	
 	private String name;
@@ -173,6 +175,16 @@ public class Character {
 	
 	public void setHealth(int ht){
 		this.ht = ht;
+	}
+	
+	public Equipment.Weapon getWeapon() {
+		Equipment.Weapon wpn = null;
+		for (Equipment.Item eq : equipment) {
+			if (eq instanceof Equipment.Weapon) {
+				wpn = (Equipment.Weapon)eq;
+			}
+		}
+		return wpn;
 	}
 	
 	public String toString() {

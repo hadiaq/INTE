@@ -18,6 +18,24 @@ public class CombatTest {
 	}
 	
 	@Test
+	public void combatTurnTest() {
+		
+		Equipment.Item sword = new Equipment.Weapon.HandWeapon.Shortsword();
+		atk.addItem(sword);
+		atk.equip(sword);
+		Combat.CombatTurn ct = new Combat.CombatTurn(atk, def, 1);
+		
+		assertEquals(ct.getAttackerDiceRoll(atk), Equipment.Weapon.calculateBasicWeaponDamage(atk.getStrength(), Equipment.Weapon.AttackType.SWINGING));
+		int damage = ct.calculateDamage(ct.getAttackerDiceRoll(atk));
+		
+		assertTrue(ct.calculateDamage(ct.getAttackerDiceRoll(atk))>=1 && ct.calculateDamage(ct.getAttackerDiceRoll(atk))<=6);
+		ct.dealDamage(def);
+		
+		assertTrue(def.getHealth() >= 4 && def.getHealth() <= 9);
+		
+	}
+	
+	@Test
 	public void defendTest() {
 		Character def = new Character("olle", 100);
 		
