@@ -1,7 +1,10 @@
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CharacterTest {
 
@@ -94,4 +97,95 @@ public class CharacterTest {
 		victim.block(attacker);
 		assertEquals(Character.State.Blocking, victim.getState());
 	}
+	
+	@Test
+	public void unEquipTest() {
+		Character ch = new Character("Attacker", 100);
+		Equipment.Item item = new Equipment.Item("Ring", 20, 0.0);
+		ArrayList<Equipment.Item> compare = new ArrayList<Equipment.Item>();
+		ch.equip(item);
+		ch.unequip(item);
+		
+		assertEquals(ch.getEquippedItemsList(), compare);
+	}
+	
+	@Test
+	public void getItemTest() {
+		Character ch = new Character("Attacker", 100);
+		Equipment.Item item = new Equipment.Item("Ring", 20, 0.0);
+		ArrayList<Equipment.Item> compare = new ArrayList<Equipment.Item>();
+		compare.add(item);
+		ch.addItem(item);
+		
+		assertEquals(ch.getItems(), compare);
+	}
+	
+	@Test
+	public void addItemTest() {
+		Character ch = new Character("Attacker", 100);
+		Equipment.Item item = new Equipment.Item("Ring", 20, 0.0);
+		ch.addItem(item);
+		ArrayList<Equipment.Item> list = ch.getItems();
+		Equipment.Item compare = list.get(0); 
+		
+		assertEquals(item, compare);
+	}
+	
+	@Test
+	public void addAdvantageTest() {
+		Character ch = new Character("Attacker", 100);
+		Advantage adv = new Advantage("Hej", "Hej", 2);
+		ch.addAdvantage("Hej");
+		Map<String, Advantage> advMap = ch.getAdvantages();
+		
+		assertEquals(advMap.containsKey("Hej"), true);
+	}
+	
+	@Test
+	public void removeAdvantageTest() {
+		Character ch = new Character("Attacker", 100);
+		Advantage adv = new Advantage("Hej", "Hej", 2);
+		ch.addAdvantage("Hej");
+		ch.removeAdvantage("Hej");
+		Map<String, Advantage> advMap = ch.getAdvantages();
+		
+		assertEquals(advMap.containsKey("Hej"), false);
+	}
+	
+	@Test
+	public void getNameTest() {
+		Character ch = new Character("Attacker", 100);
+		ch.setName("Axel");
+		
+		assertEquals("Axel", ch.getName());
+		
+	}
+	
+	@Test
+	public void stateTest() {
+		Character ch = new Character("Attacker", 100);
+		assertEquals(ch.isPassive(), true);
+		assertEquals(ch.isAttacking(), false);
+		assertEquals(ch.isParrying(), false);
+		assertEquals(ch.isBlocking(), false);
+		assertEquals(ch.isDodging(), false);
+		
+	}
+	
+	@Test 
+	public void setPointsTest() {
+		Character ch = new Character("Attacker", 100);
+		ch.setPointsTotal(150);
+		assertEquals(ch.getPointsTotal(), 150);
+		ch.setPointsUnspent(95);
+		assertEquals(ch.getPointsUnspent(),95);
+	}
+	
+	@Test
+	public void toStringTest() {
+		Character ch1 = new Character("Attacker", 100);
+		Character ch2 = new Character("Attacker", 100);
+		assertEquals(ch1.toString().equals(ch2.toString()), true);
+	}
+	
 }
