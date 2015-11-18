@@ -7,6 +7,27 @@ public class CombatTest {
 	Character def = new Character("olle", 100);
 	
 	@Test
+	public void getStartingCharacterTest () {
+		Combat com = new Combat(atk, def);
+		atk.setDexterity(15);
+		def.setDexterity(5);
+		assertEquals(com.getStartingCharacter(), atk);
+		atk.setDexterity(5);
+		def.setDexterity(15);
+		assertEquals(com.getStartingCharacter(), def);
+		atk.setDexterity(10);
+		def.setDexterity(10);
+		assertEquals(com.getStartingCharacter(), com.randomizeStartingCharacter());
+	}
+	
+	@Test
+	public void attackSwingingTest () {
+		Equipment.Weapon.HandWeapon.Shortsword ss = new Equipment.Weapon.HandWeapon.Shortsword();
+		atk.equip(ss);
+		
+	}
+	
+	@Test
 	public void attackTest() {
 		atk.setStrength(10);
 		boolean strike = Combat.attack(atk, def);
@@ -15,24 +36,6 @@ public class CombatTest {
 			assertEquals(strike, true);
 		else
 			assertEquals(strike, false);
-	}
-	
-	@Test
-	public void combatTurnTest() {
-		
-		Equipment.Item sword = new Equipment.Weapon.HandWeapon.Shortsword();
-		atk.addItem(sword);
-		atk.equip(sword);
-		Combat.CombatTurn ct = new Combat.CombatTurn(atk, def, 1);
-		
-		assertEquals(ct.getAttackerDiceRoll(atk), Equipment.Weapon.calculateBasicWeaponDamage(atk.getStrength(), Equipment.Weapon.AttackType.SWINGING));
-		int damage = ct.calculateDamage(ct.getAttackerDiceRoll(atk));
-		
-		assertTrue(ct.calculateDamage(ct.getAttackerDiceRoll(atk))>=1 && ct.calculateDamage(ct.getAttackerDiceRoll(atk))<=6);
-		ct.dealDamage(def);
-		
-		assertTrue(def.getHealth() >= 4 && def.getHealth() <= 9);
-		
 	}
 	
 	@Test
@@ -55,4 +58,22 @@ public class CombatTest {
 			assertEquals(defend, false);
 		}
 	}
+	
+//	@Test
+//	public void combatTurnTest() {
+//		
+//		Equipment.Item sword = new Equipment.Weapon.HandWeapon.Shortsword();
+//		atk.addItem(sword);
+//		atk.equip(sword);
+//		Combat.CombatTurn ct = new Combat.CombatTurn(atk, def, 1);
+//		
+//		assertEquals(ct.getAttackerDiceRoll(atk), Equipment.Weapon.calculateBasicWeaponDamage(atk.getStrength(), Equipment.Weapon.AttackType.SWINGING));
+//		int damage = ct.calculateDamage(ct.getAttackerDiceRoll(atk));
+//		
+//		assertTrue(ct.calculateDamage(ct.getAttackerDiceRoll(atk))>=1 && ct.calculateDamage(ct.getAttackerDiceRoll(atk))<=6);
+//		ct.dealDamage(def);
+//		
+//		assertTrue(def.getHealth() >= 4 && def.getHealth() <= 9);
+//		
+//	}
 }

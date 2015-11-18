@@ -190,6 +190,10 @@ public class Character {
 		return wpn;
 	}
 	
+	public int getWeaponSkill() {
+		return this.getDexterity()-4;
+	}
+	
 	public String toString() {
 		return "Name : " +name
 				+"\nPoint Total " + ptsTotal
