@@ -11,27 +11,22 @@ public class Combat {
 		this.char2 = char2;
 	}
 	
-	public Character getStartingCharacter () {
+	public Character getStartingCharacter (int dieRoll) {
 		Character startingChar = null;
+		
 		if (char1.getMovementSpeed() > char2.getMovementSpeed()) {
 			startingChar = char1;
 			
 		} else if (char2.getMovementSpeed() > char1.getMovementSpeed()) {
 			startingChar = char2;
 			
-		} else {
-			startingChar = randomizeStartingCharacter();
-		}
-		return startingChar;
-	}
-	
-	public Character randomizeStartingCharacter() {
-		Character startingChar = null;
-		int die = new Die().getValue();
-		if (die <= 3)
+		} else if (char1.getMovementSpeed() == char2.getMovementSpeed() && dieRoll <= 3) {
 			startingChar = char1;
-		else
+			
+		} else {
 			startingChar = char2;
+			
+		}
 		
 		return startingChar;
 	}
@@ -104,71 +99,6 @@ public class Combat {
 	public void applyDamage (int damage, Character defender) {
 		defender.setHealth(defender.getHealth()-damage);
 	}
-	
-//	public static class CombatTurn {
-//		private int turnCount;
-//		private static Character attacker;
-//		private static Character defender;
-//		private boolean avoided;
-//		
-//		
-//		public CombatTurn (Character attacker, Character defender, int turnCount) {
-//			this.attacker = attacker;
-//			this.defender = defender;
-//			this.turnCount = turnCount;
-//			
-//			if (defender.isBlocking()) {
-//				ArrayList<Equipment.Item> equipped = new ArrayList<Equipment.Item>(defender.getEquippedItemsList());
-//				for (Equipment.Item eq : equipped) {
-//					if (eq instanceof Equipment.Shield) {
-//						DiceRoll dr = new DiceRoll(3,0);
-//						if (dr.getValue() <= 7) {
-//							avoided = true;
-//						}
-//					}
-//				}
-//			} else if (defender.isParrying()) {
-//				ArrayList<Equipment.Item> equipped = new ArrayList<Equipment.Item>(defender.getEquippedItemsList());
-//				for (Equipment.Item eq : equipped) {
-//					if (eq instanceof Equipment.Weapon.HandWeapon) {
-//						DiceRoll dr = new DiceRoll(2,0);
-//						if (dr.getValue() <= 5) {
-//							avoided = true;
-//						}
-//					}
-//				}
-//			} else if (defender.isDodging()) {
-//				DiceRoll dr = new DiceRoll(2,0);
-//				if (dr.getValue() <= defender.getDexterity()/2) {
-//					avoided = true;
-//				}
-//			} else {
-//				avoided = false;
-//			}
-//				
-//			
-//		}
-//		
-//		public static DiceRoll getAttackerDiceRoll (Character atk) {
-//			Equipment.Weapon weapon = attacker.getWeapon();
-//			DiceRoll diceRoll = weapon.calculateBasicWeaponDamage(attacker.getStrength(), Equipment.Weapon.AttackType.SWINGING);
-//			return diceRoll;
-//		}
-//		
-//		public int calculateDamage(DiceRoll dr) {
-//			int damage = getAttackerDiceRoll(attacker).getValue();
-//			return damage;
-//		}
-//		
-//		public void dealDamage (Character def) {
-//			if(avoided == false) {
-//				def.setHealth(def.getHealth()-calculateDamage(getAttackerDiceRoll(attacker)));
-//			}
-//		}
-//		
-//		
-//		
-//	}
 	
 	public static boolean attack(Character atk, Character def){
 		

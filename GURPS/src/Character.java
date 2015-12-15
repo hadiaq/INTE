@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -7,7 +6,6 @@ import java.util.HashMap;
 public class Character {
 	
 	private String name;
-	private String appearance;
 	private int ptsTotal;
 	
 	//Lista �ver advantages som �r aktiva hos denna karakt�r

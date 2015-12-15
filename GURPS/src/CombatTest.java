@@ -11,13 +11,14 @@ public class CombatTest {
 		Combat com = new Combat(atk, def);
 		atk.setDexterity(15);
 		def.setDexterity(5);
-		assertEquals(com.getStartingCharacter(), atk);
+		assertEquals(com.getStartingCharacter(3), atk);
 		atk.setDexterity(5);
 		def.setDexterity(15);
-		assertEquals(com.getStartingCharacter(), def);
+		assertEquals(com.getStartingCharacter(3), def);
 		atk.setDexterity(10);
 		def.setDexterity(10);
-		assertEquals(com.getStartingCharacter(), com.randomizeStartingCharacter());
+		assertEquals(com.getStartingCharacter(2), atk);
+		assertEquals(com.getStartingCharacter(5), def);
 	}
 	
 	@Test
