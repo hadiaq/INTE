@@ -1,0 +1,710 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>FindBugs Report</title>
+<style type="text/css">
+		.tablerow0 {
+			background: #EEEEEE;
+		}
+
+		.tablerow1 {
+			background: white;
+		}
+
+		.detailrow0 {
+			background: #EEEEEE;
+		}
+
+		.detailrow1 {
+			background: white;
+		}
+
+		.tableheader {
+			background: #b9b9fe;
+			font-size: larger;
+		}
+
+		.tablerow0:hover, .tablerow1:hover {
+			background: #aaffaa;
+		}
+
+		.priority-1 {
+		    color: red;
+		    font-weight: bold;
+		}
+		.priority-2 {
+		    color: orange;
+		    font-weight: bold;
+		}
+		.priority-3 {
+		    color: green;
+		    font-weight: bold;
+		}
+		.priority-4 {
+		    color: blue;
+		    font-weight: bold;
+		}
+		</style>
+<script type="text/javascript">
+			function toggleRow(elid) {
+				if (document.getElementById) {
+					element = document.getElementById(elid);
+					if (element) {
+						if (element.style.display == 'none') {
+							element.style.display = 'block';
+							//window.status = 'Toggle on!';
+						} else {
+							element.style.display = 'none';
+							//window.status = 'Toggle off!';
+						}
+					}
+				}
+			}
+		</script>
+</head>
+<body>
+<h1>
+<a href="http://findbugs.sourceforge.net">FindBugs</a> Report</h1>
+<h2>Project Information</h2>
+<p>Project: 
+		</p>
+<p>FindBugs version: 3.0.1</p>
+<p>Code analyzed:</p>
+<ul>
+<li>/home/erik/git/INTE/INTE/GURPS/GURPS.jar</li>
+</ul>
+<p>
+<br/>
+<br/>
+</p>
+<h2>Metrics</h2>
+<p>0 lines of code analyzed,
+	in 0 classes, 
+	in 1 packages.</p>
+<table width="500" cellpadding="5" cellspacing="2">
+<tr class="tableheader">
+<th align="left">Metric</th>
+<th align="right">Total</th>
+<th align="right">Density*</th>
+</tr>
+<tr class="tablerow0">
+<td>High Priority Warnings</td>
+<td align="right">4</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="tablerow1">
+<td>Medium Priority Warnings</td>
+<td align="right">2</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="tablerow1">
+<td>Low Priority Warnings</td>
+<td align="right">23</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="$totalClass">
+<td>
+<b>Total Warnings</b>
+</td>
+<td align="right">
+<b>29</b>
+</td>
+<td align="right">
+<b>0.00</b>
+</td>
+</tr>
+</table>
+<p>
+<i>(* Defects per Thousand lines of non-commenting source statements)</i>
+</p>
+<p>
+<br/>
+<br/>
+</p>
+<h2>Contents</h2>
+<ul>
+<li>
+<a href="#Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+</li>
+<li>
+<a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+</li>
+<li>
+<a href="#Warnings_STYLE">Dodgy code Warnings</a>
+</li>
+<li>
+<a href="#Details">Details</a>
+</li>
+</ul>
+<h1>Summary</h1>
+<table width="500" cellpadding="5" cellspacing="2">
+<tr class="tableheader">
+<th align="left">Warning Type</th>
+<th align="right">Number</th>
+</tr>
+<tr class="tablerow0">
+<td>
+<a href="#Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+</td>
+<td align="right">5</td>
+</tr>
+<tr class="tablerow1">
+<td>
+<a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+</td>
+<td align="right">5</td>
+</tr>
+<tr class="tablerow0">
+<td>
+<a href="#Warnings_STYLE">Dodgy code Warnings</a>
+</td>
+<td align="right">19</td>
+</tr>
+<tr class="tablerow1">
+<td>
+<b>Total</b>
+</td>
+<td align="right">
+<b>29</b>
+</td>
+</tr>
+</table>
+<h1>Warnings</h1>
+<p>Click on a warning row to see full context information.</p>
+<h2>
+<a name="Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="0">
+<tr class="tableheader">
+<th align="left">Code</th>
+<th align="left">Warning</th>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66090');">
+<td>
+<span class="priority-3">Nm</span>
+</td>
+<td>The method name CreateShieldTest.IllegalArgumentTest1() doesn't start with a lower case letter</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66090" style="display: none;">
+<a href="#NM_METHOD_NAMING_CONVENTION">Bug type NM_METHOD_NAMING_CONVENTION (click for details)</a>
+<br/>In class CreateShieldTest<br/>In method CreateShieldTest.IllegalArgumentTest1()<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66128');">
+<td>
+<span class="priority-3">Nm</span>
+</td>
+<td>The method name CreateShieldTest.IllegalArgumentTest2() doesn't start with a lower case letter</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66128" style="display: none;">
+<a href="#NM_METHOD_NAMING_CONVENTION">Bug type NM_METHOD_NAMING_CONVENTION (click for details)</a>
+<br/>In class CreateShieldTest<br/>In method CreateShieldTest.IllegalArgumentTest2()<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66166');">
+<td>
+<span class="priority-3">Nm</span>
+</td>
+<td>The method name CreateShieldTest.IllegalArgumentTest3() doesn't start with a lower case letter</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66166" style="display: none;">
+<a href="#NM_METHOD_NAMING_CONVENTION">Bug type NM_METHOD_NAMING_CONVENTION (click for details)</a>
+<br/>In class CreateShieldTest<br/>In method CreateShieldTest.IllegalArgumentTest3()<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66204');">
+<td>
+<span class="priority-3">Nm</span>
+</td>
+<td>The method name CreateShieldTest.IllegalArgumentTest4() doesn't start with a lower case letter</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66204" style="display: none;">
+<a href="#NM_METHOD_NAMING_CONVENTION">Bug type NM_METHOD_NAMING_CONVENTION (click for details)</a>
+<br/>In class CreateShieldTest<br/>In method CreateShieldTest.IllegalArgumentTest4()<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66242');">
+<td>
+<span class="priority-3">Nm</span>
+</td>
+<td>The method name CreateShieldTest.IllegalArgumentTest5() doesn't start with a lower case letter</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66242" style="display: none;">
+<a href="#NM_METHOD_NAMING_CONVENTION">Bug type NM_METHOD_NAMING_CONVENTION (click for details)</a>
+<br/>In class CreateShieldTest<br/>In method CreateShieldTest.IllegalArgumentTest5()<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+</table>
+<h2>
+<a name="Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="0">
+<tr class="tableheader">
+<th align="left">Code</th>
+<th align="left">Warning</th>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66340');">
+<td>
+<span class="priority-1">MS</span>
+</td>
+<td>Die.MAX_VALUE isn't final but should be</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66340" style="display: none;">
+<a href="#MS_SHOULD_BE_FINAL">Bug type MS_SHOULD_BE_FINAL (click for details)</a>
+<br/>In class Die<br/>Field Die.MAX_VALUE<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66381');">
+<td>
+<span class="priority-1">MS</span>
+</td>
+<td>Die.MIN_VALUE isn't final but should be</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66381" style="display: none;">
+<a href="#MS_SHOULD_BE_FINAL">Bug type MS_SHOULD_BE_FINAL (click for details)</a>
+<br/>In class Die<br/>Field Die.MIN_VALUE<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66824');">
+<td>
+<span class="priority-1">MS</span>
+</td>
+<td>GURPSmain.advMap isn't final but should be</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66824" style="display: none;">
+<a href="#MS_SHOULD_BE_FINAL">Bug type MS_SHOULD_BE_FINAL (click for details)</a>
+<br/>In class GURPSmain<br/>Field GURPSmain.advMap<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66865');">
+<td>
+<span class="priority-1">MS</span>
+</td>
+<td>GURPSmain.items isn't final but should be</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66865" style="display: none;">
+<a href="#MS_SHOULD_BE_FINAL">Bug type MS_SHOULD_BE_FINAL (click for details)</a>
+<br/>In class GURPSmain<br/>Field GURPSmain.items<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66906');">
+<td>
+<span class="priority-3">MS</span>
+</td>
+<td>GURPSmain.charMap isn't final but should be</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66906" style="display: none;">
+<a href="#MS_SHOULD_BE_FINAL">Bug type MS_SHOULD_BE_FINAL (click for details)</a>
+<br/>In class GURPSmain<br/>Field GURPSmain.charMap<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+</table>
+<h2>
+<a name="Warnings_STYLE">Dodgy code Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="0">
+<tr class="tableheader">
+<th align="left">Code</th>
+<th align="left">Warning</th>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N65593');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L2 in CharacterTest.addAdvantageTest()</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N65593" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class CharacterTest<br/>In method CharacterTest.addAdvantageTest()<br/>Local variable stored in JVM register 2<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N65653');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L2 in CharacterTest.removeAdvantageTest()</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N65653" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class CharacterTest<br/>In method CharacterTest.removeAdvantageTest()<br/>Local variable stored in JVM register 2<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N65790');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L1 in CreateShieldTest.IllegalArgumentTest1()</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N65790" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class CreateShieldTest<br/>In method CreateShieldTest.IllegalArgumentTest1()<br/>Local variable stored in JVM register 1<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N65850');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L1 in CreateShieldTest.IllegalArgumentTest2()</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N65850" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class CreateShieldTest<br/>In method CreateShieldTest.IllegalArgumentTest2()<br/>Local variable stored in JVM register 1<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N65910');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L1 in CreateShieldTest.IllegalArgumentTest3()</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N65910" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class CreateShieldTest<br/>In method CreateShieldTest.IllegalArgumentTest3()<br/>Local variable stored in JVM register 1<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N65970');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L1 in CreateShieldTest.IllegalArgumentTest4()</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N65970" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class CreateShieldTest<br/>In method CreateShieldTest.IllegalArgumentTest4()<br/>Local variable stored in JVM register 1<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66030');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L1 in CreateShieldTest.IllegalArgumentTest5()</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66030" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class CreateShieldTest<br/>In method CreateShieldTest.IllegalArgumentTest5()<br/>Local variable stored in JVM register 1<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66280');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L1 in DiceRollTest.negativeNumberOfDicesTest()</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66280" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class DiceRollTest<br/>In method DiceRollTest.negativeNumberOfDicesTest()<br/>Local variable stored in JVM register 1<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66464');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L1 in EquipmentTest.calculateBasicSwingingWeaponDamageZeroOrNegativeStrengthTest()</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66464" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class EquipmentTest<br/>In method EquipmentTest.calculateBasicSwingingWeaponDamageZeroOrNegativeStrengthTest()<br/>Local variable stored in JVM register 1<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66524');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L1 in EquipmentTest.calculateBasicThrustingWeaponDamageZeroOrNegativeStrengthTest()</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66524" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class EquipmentTest<br/>In method EquipmentTest.calculateBasicThrustingWeaponDamageZeroOrNegativeStrengthTest()<br/>Local variable stored in JVM register 1<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66584');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L1 in EquipmentTest.leatherJacketTooHighTechLevelTest()</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66584" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class EquipmentTest<br/>In method EquipmentTest.leatherJacketTooHighTechLevelTest()<br/>Local variable stored in JVM register 1<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66644');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L1 in EquipmentTest.leatherJacketTooLowTechLevelTest()</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66644" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class EquipmentTest<br/>In method EquipmentTest.leatherJacketTooLowTechLevelTest()<br/>Local variable stored in JVM register 1<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66704');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L1 in EquipmentTest.scaleArmorTooHighTechLevelTest()</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66704" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class EquipmentTest<br/>In method EquipmentTest.scaleArmorTooHighTechLevelTest()<br/>Local variable stored in JVM register 1<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66764');">
+<td>
+<span class="priority-3">DLS</span>
+</td>
+<td>Dead store to $L1 in EquipmentTest.scaleArmorTooLowTechLevelTest()</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66764" style="display: none;">
+<a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+<br/>In class EquipmentTest<br/>In method EquipmentTest.scaleArmorTooLowTechLevelTest()<br/>Local variable stored in JVM register 1<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N65752');">
+<td>
+<span class="priority-3">FE</span>
+</td>
+<td>Test for floating point equality in Combat.getStartingCharacter(int)</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N65752" style="display: none;">
+<a href="#FE_FLOATING_POINT_EQUALITY">Bug type FE_FLOATING_POINT_EQUALITY (click for details)</a>
+<br/>In class Combat<br/>In method Combat.getStartingCharacter(int)<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N65554');">
+<td>
+<span class="priority-2">ICAST</span>
+</td>
+<td>Integral division result cast to double or float in Character.getMovementSpeed()</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N65554" style="display: none;">
+<a href="#ICAST_IDIV_CAST_TO_DOUBLE">Bug type ICAST_IDIV_CAST_TO_DOUBLE (click for details)</a>
+<br/>In class Character<br/>In method Character.getMovementSpeed()<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N65713');">
+<td>
+<span class="priority-2">ICAST</span>
+</td>
+<td>Integral division result cast to double or float in CharacterTest.getMovementSpeedTest()</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N65713" style="display: none;">
+<a href="#ICAST_IDIV_CAST_TO_DOUBLE">Bug type ICAST_IDIV_CAST_TO_DOUBLE (click for details)</a>
+<br/>In class CharacterTest<br/>In method CharacterTest.getMovementSpeedTest()<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66422');">
+<td>
+<span class="priority-3">UC</span>
+</td>
+<td>Useless condition: it's known that arg0 &gt; 0 at this point</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66422" style="display: none;">
+<a href="#UC_USELESS_CONDITION">Bug type UC_USELESS_CONDITION (click for details)</a>
+<br/>In class Equipment$Weapon<br/>In method Equipment$Weapon.calculateBasicWeaponDamage(int, Equipment$Weapon$AttackType)<br/>Value arg0 &gt; 0<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66947');">
+<td>
+<span class="priority-3">UrF</span>
+</td>
+<td>Unread public/protected field: GURPSmain.charMap</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66947" style="display: none;">
+<a href="#URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD">Bug type URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD (click for details)</a>
+<br/>In class GURPSmain<br/>Field GURPSmain.charMap<br/>In &lt;Unknown&gt;</p>
+</td>
+</tr>
+</table>
+<h1>
+<a name="Details">Details</a>
+</h1>
+<h2>
+<a name="DLS_DEAD_LOCAL_STORE">DLS_DEAD_LOCAL_STORE: Dead store to local variable</a>
+</h2>
+
+<p>
+This instruction assigns a value to a local variable,
+but the value is not read or used in any subsequent instruction.
+Often, this indicates an error, because the value computed is never
+used.
+</p>
+<p>
+Note that Sun's javac compiler often generates dead stores for
+final local variables.  Because FindBugs is a bytecode-based tool,
+there is no easy way to eliminate these false positives.
+</p>
+
+    
+<h2>
+<a name="FE_FLOATING_POINT_EQUALITY">FE_FLOATING_POINT_EQUALITY: Test for floating point equality</a>
+</h2>
+   
+    <p>
+    This operation compares two floating point values for equality.
+    Because floating point calculations may involve rounding,
+   calculated float and double values may not be accurate.
+    For values that must be precise, such as monetary values,
+   consider using a fixed-precision type such as BigDecimal.
+    For values that need not be precise, consider comparing for equality
+    within some range, for example:
+    <code>if ( Math.abs(x - y) &lt; .0000001 )</code>.
+   See the Java Language Specification, section 4.2.4.
+    </p>
+    
+     
+<h2>
+<a name="ICAST_IDIV_CAST_TO_DOUBLE">ICAST_IDIV_CAST_TO_DOUBLE: Integral division result cast to double or float</a>
+</h2>
+
+<p>
+This code casts the result of an integral division (e.g., int or long division)
+operation to double or
+float.
+Doing division on integers truncates the result
+to the integer value closest to zero.  The fact that the result
+was cast to double suggests that this precision should have been retained.
+What was probably meant was to cast one or both of the operands to
+double <em>before</em> performing the division.  Here is an example:
+</p>
+<blockquote>
+<pre>
+int x = 2;
+int y = 5;
+// Wrong: yields result 0.0
+double value1 =  x / y;
+
+// Right: yields result 0.4
+double value2 =  x / (double) y;
+</pre>
+</blockquote>
+
+    
+<h2>
+<a name="MS_SHOULD_BE_FINAL">MS_SHOULD_BE_FINAL: Field isn't final but should be</a>
+</h2>
+
+   <p>
+This static field public but not final, and
+could be changed by malicious code or
+        by accident from another package.
+        The field could be made final to avoid
+        this vulnerability.</p>
+
+    
+<h2>
+<a name="NM_METHOD_NAMING_CONVENTION">NM_METHOD_NAMING_CONVENTION: Method names should start with a lower case letter</a>
+</h2>
+
+  <p>
+Methods should be verbs, in mixed case with the first letter lowercase, with the first letter of each internal word capitalized.
+</p>
+
+    
+<h2>
+<a name="UC_USELESS_CONDITION">UC_USELESS_CONDITION: Condition has no effect</a>
+</h2>
+
+<p>This condition always produces the same result as the value of the involved variable was narrowed before. 
+Probably something else was meant or condition can be removed.</p>
+
+    
+<h2>
+<a name="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD">URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD: Unread public/protected field</a>
+</h2>
+
+  <p> This field is never read.&nbsp;
+The field is public or protected, so perhaps
+    it is intended to be used with classes not seen as part of the analysis. If not,
+consider removing it from the class.</p>
+
+    </body>
+</html>
