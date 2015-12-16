@@ -2,12 +2,14 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CharacterTest {
-
+	private static final double DELTA = 1e-15;
+	
 	@Test
 	public void constructorTest() {
 		Character newChar = new Character("Test", 100);
@@ -169,7 +171,15 @@ public class CharacterTest {
 		assertEquals(ch.isParrying(), false);
 		assertEquals(ch.isBlocking(), false);
 		assertEquals(ch.isDodging(), false);
-		
+		ch.setState(Character.State.Attacking);
+		assertEquals(ch.isPassive(), false);
+		assertEquals(ch.isAttacking(), true);
+		ch.setState(Character.State.Parrying);
+		assertEquals(ch.isParrying(), true);
+		ch.setState(Character.State.Blocking);
+		assertEquals(ch.isBlocking(), true);
+		ch.setState(Character.State.Dodging);
+		assertEquals(ch.isDodging(), true);
 	}
 	
 	@Test 
@@ -186,6 +196,34 @@ public class CharacterTest {
 		Character ch1 = new Character("Attacker", 100);
 		Character ch2 = new Character("Attacker", 100);
 		assertEquals(ch1.toString().equals(ch2.toString()), true);
+	}
+	
+	@Test
+	public void getWeaponTest() {
+		Character newChar = new Character("Test", 100);
+		Equipment.Weapon.HandWeapon.Shortsword ss = new Equipment.Weapon.HandWeapon.Shortsword();
+		newChar.equip(ss);
+		Equipment.Item compare = newChar.getWeapon();
+		
+		assertEquals(compare, ss);
+	}
+	
+	@Test
+	public void getWeaponSkillTest() {
+		Character newChar = new Character("Test", 100);
+		newChar.setDexterity(15);
+		int expected = newChar.getDexterity()-4;
+		assertEquals(newChar.getWeaponSkill(), expected);
+	}
+	
+	@Test
+	public void getMovementSpeedTest() {
+		Character newChar = new Character("Test", 100);
+		newChar.setDexterity(12);
+		newChar.setHealth(9);
+		double expected = ((newChar.getDexterity()+newChar.getHealth())/4);
+		assertEquals(newChar.getMovementSpeed(), expected, DELTA);
+
 	}
 	
 }
