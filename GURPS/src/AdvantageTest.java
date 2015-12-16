@@ -8,7 +8,7 @@ public class AdvantageTest {
 	@Test
 	public void advantageConstructorTest() {
 		String name ="Snabbhet";
-		String description = "Du är snabb";
+		String description = "Du Ã¤r snabb";
 		int pointCost = 15;
 		Advantage adv = new Advantage(name, description, pointCost);
 		assertEquals(adv.getName().equals(name), true);
@@ -19,7 +19,7 @@ public class AdvantageTest {
 	@Test
 	public void getNameTest() {
 		String name ="Snabbhet";
-		String description = "Du är snabb";
+		String description = "Du Ã¤r snabb";
 		int pointCost = 15;
 		Advantage adv = new Advantage(name, description, pointCost);
 		assertEquals(adv.getName().equals(name), true);
@@ -28,7 +28,7 @@ public class AdvantageTest {
 	@Test
 	public void setNameTest() {
 		String name ="Snabbhet";
-		String description = "Du är snabb";
+		String description = "Du Ã¤r snabb";
 		int pointCost = 15;
 		Advantage adv = new Advantage(name, description, pointCost);
 		String newName ="Albert";
@@ -39,7 +39,7 @@ public class AdvantageTest {
 	@Test
 	public void getDescriptionTest() {
 		String name ="Snabbhet";
-		String description = "Du är snabb";
+		String description = "Du Ã¤r snabb";
 		int pointCost = 15;
 		Advantage adv = new Advantage(name, description, pointCost);
 		assertEquals(adv.getDescription().equals(description), true);
@@ -48,7 +48,7 @@ public class AdvantageTest {
 	@Test
 	public void setDescriptionTest() {
 		String name ="Snabbhet";
-		String description = "Du är snabb";
+		String description = "Du Ã¤r snabb";
 		int pointCost = 15;
 		Advantage adv = new Advantage(name, description, pointCost);
 		String newDescription ="Albert";
@@ -59,7 +59,7 @@ public class AdvantageTest {
 	@Test
 	public void getPointCostTest() {
 		String name ="Snabbhet";
-		String description = "Du är snabb";
+		String description = "Du Ã¤r snabb";
 		int pointCost = 15;
 		Advantage adv = new Advantage(name, description, pointCost);
 		assertEquals(adv.getPointCost()==(pointCost), true);
@@ -68,7 +68,7 @@ public class AdvantageTest {
 	@Test
 	public void setPointCostTest() {
 		String name ="Snabbhet";
-		String description = "Du är snabb";
+		String description = "Du Ã¤r snabb";
 		int pointCost = 15;
 		Advantage adv = new Advantage(name, description, pointCost);
 		int newPointCost =10;
@@ -79,7 +79,7 @@ public class AdvantageTest {
 	@Test
 	public void toStringTest() {
 		String name ="Snabbhet";
-		String description = "Du är snabb";
+		String description = "Du Ã¤r snabb";
 		int pointCost = 15;
 		Advantage adv1 = new Advantage(name, description, pointCost);
 		Advantage adv2 = new Advantage(name, description, pointCost);

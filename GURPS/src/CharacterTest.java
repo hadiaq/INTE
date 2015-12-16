@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 
 public class CharacterTest {
 	private static final double DELTA = 1e-15;
@@ -136,22 +138,34 @@ public class CharacterTest {
 	@Test
 	public void addAdvantageTest() {
 		Character ch = new Character("Attacker", 100);
-		Advantage adv = new Advantage("Hej", "Hej", 2);
-		ch.addAdvantage("Hej");
-		Map<String, Advantage> advMap = ch.getAdvantages();
-		
-		assertEquals(advMap.containsKey("Hej"), true);
+
+		ch.addAdvantage(Advantage.absoluteDirection);
+		ch.addAdvantage(Advantage.resistantToPoison);
+		ch.addAdvantage(Advantage.doubleJointed);
+
+		Set<Advantage> advantages = ch.getAdvantages();
+		Set<Advantage> compare = new HashSet<Advantage>();
+
+		compare.add(Advantage.absoluteDirection);
+		compare.add(Advantage.resistantToPoison);
+		compare.add(Advantage.doubleJointed);
+
+		assertEquals(advantages, compare);
 	}
 	
 	@Test
 	public void removeAdvantageTest() {
 		Character ch = new Character("Attacker", 100);
-		Advantage adv = new Advantage("Hej", "Hej", 2);
-		ch.addAdvantage("Hej");
-		ch.removeAdvantage("Hej");
-		Map<String, Advantage> advMap = ch.getAdvantages();
-		
-		assertEquals(advMap.containsKey("Hej"), false);
+
+		ch.addAdvantage(Advantage.absoluteDirection);
+		//ch.addAdvantage(Advantage.resistantToPoison);
+		//ch.addAdvantage(Advantage.doubleJointed);
+
+		ch.removeAdvantage(Advantage.absoluteDirection);
+		//ch.removeAdvantage(Advantage.resistantToPoison);
+		//ch.removeAdvantage(Advantage.doubleJointed);
+
+		assertTrue(ch.getAdvantages().isEmpty());
 	}
 	
 	@Test

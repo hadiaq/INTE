@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-
+import java.util.Set;
+import java.util.HashSet;
 
 public class Character {
 	
@@ -10,6 +11,7 @@ public class Character {
 	
 	//Lista �ver advantages som �r aktiva hos denna karakt�r
 	private Set<Advantage> advantages = new HashSet<Advantage>();
+	
 	private int ptsUnspent;
 	private int st;
 	private int dx;

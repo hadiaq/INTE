@@ -3,7 +3,7 @@ public class Advantage {
 	private String description;
 	private int pointCost;
 
-	static final Advantage2 absoluteDirection = new Advantage2("Absolute Direction",
+	static final Advantage absoluteDirection = new Advantage("Absolute Direction",
 		"You always know which way is north, and you can always " +
 		"re-trace a path you have followed within the past month, " +
 		"no matter how faint it may be. This ability does not " +
@@ -12,15 +12,15 @@ public class Advantage {
 		"underwater, and on other planets. Also gives a +3 bonus " +
 		"on your Navigation skill.", 5);
 
-	static final Advantage2 resistantRoPoison = new Advantage2("Resistant to Poison", "Poison affects you less; +3 " +
+	static final Advantage resistantToPoison = new Advantage("Resistant to Poison", "Poison affects you less; +3 " +
 		"to HT to resist its effects.", 5);
 
-	static final Advantage2 doubleJointed = new Advantage2("Double-Jointed", "Your body is unusually flexible. " +
+	static final Advantage doubleJointed = new Advantage("Double-Jointed", "Your body is unusually flexible. " +
 		"You get a +3 on any Climbing roll, on any roll to escape from " +
 		"ropes, handcuffs or other restraints, or on any Mechanic roll " +
 		"(to reach into an engine, of course)", 10);
 
-	public Advantage2(String name, String description, int pointCost) {
+	public Advantage(String name, String description, int pointCost) {
 		this.name = name;
 		this.description = description;
 		this.pointCost = pointCost;
