@@ -23,27 +23,27 @@ public class CreateShieldTest {
 
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void IllegalArgumentTest1(){
+	public void illegalArgumentTest1(){
 		Equipment.Shield sh = GURPSmain.createShield(null , 0, 4.0, 2);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void IllegalArgumentTest2(){
+	public void illegalArgumentTest2(){
 		Equipment.Shield sh = GURPSmain.createShield("The Shield", -2, 5.0, 2);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void IllegalArgumentTest3(){
+	public void illegalArgumentTest3(){
 		Equipment.Shield sh = GURPSmain.createShield("The Shield", 3, 0, 3);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void IllegalArgumentTest4(){
+	public void illegalArgumentTest4(){
 		Equipment.Shield sh = GURPSmain.createShield("The Shield", 3, -2.0, 3);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void IllegalArgumentTest5(){
+	public void illegalArgumentTest5(){
 		Equipment.Shield sh = GURPSmain.createShield("The Shield", 4, 5.0, -3);
 	}
 	
