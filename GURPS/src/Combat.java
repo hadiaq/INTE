@@ -13,14 +13,16 @@ public class Combat {
 	
 	public Character getStartingCharacter (int dieRoll) {
 		Character startingChar = null;
+		Double d1 = new Double(char1.getMovementSpeed());
+		Double d2 = new Double(char2.getMovementSpeed());
 		
-		if (char1.getMovementSpeed() > char2.getMovementSpeed()) {
+		if (d1.compareTo(d2) > 0 ) {
 			startingChar = char1;
 			
-		} else if (char2.getMovementSpeed() > char1.getMovementSpeed()) {
+		} else if (d1.compareTo(d2)<0) {
 			startingChar = char2;
 			
-		} else if (char1.getMovementSpeed() == char2.getMovementSpeed() && dieRoll <= 3) {
+		} else if (d1.compareTo(d2)==0 && dieRoll <= 3) {
 			startingChar = char1;
 			
 		} else {
