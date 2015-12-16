@@ -31,115 +31,124 @@ public class Combat {
 		return startingChar;
 	}
 	
-	public boolean attackSwinging(Character attacker, Character defender) {
-		Equipment.Weapon wpn = attacker.getWeapon();
-		DiceRoll dr = wpn.calculateBasicWeaponDamage(attacker.getStrength(), Equipment.Weapon.AttackType.SWINGING);
-		int damage = dr.getValue();
+	public boolean attackSwing(Character attacker, Character defender, int die) {
 		boolean hit = false;
 		
 		if (defender.getState() == Character.State.Blocking) {
-			hit = block(attacker, defender);
+			int chanceToBlock = 0;
+			for (Equipment.Item shield : defender.getEquippedItemsList()) {
+				if (shield instanceof Equipment.Shield) {
+					chanceToBlock = ((Equipment.Shield) shield).getPassiveDefense();
+				}
+			}
+			if (chanceToBlock > die) {
+				hit = false;
+			} else {
+				hit = true;
+			}
+			
 		} else if (defender.getState() == Character.State.Parrying) {
-			hit = parry(attacker, defender);
+			int chanceToParry = 0;
+			
+			for (Equipment.Item weapon : defender.getEquippedItemsList()) {
+				if (weapon instanceof Equipment.Weapon) {
+					chanceToParry = defender.getWeaponSkill();
+				}
+			}
+			if (chanceToParry > die) {
+				hit = false;
+			} else {
+				hit = true;
+			}
+			
 		} else if (defender.getState() == Character.State.Dodging) {
-			hit = dodge(attacker, defender);
-		}
-		
-		if (hit == true) {
-			applyDamage(damage, defender);
+			int chanceToDodge = (int)defender.getMovementSpeed();
+			
+			if (chanceToDodge > die) {
+				hit = false;
+			} else {
+				hit = true;
+			}
 		}
 		
 		return hit;
+		
 	}
 	
-	
-	
-	public boolean block(Character attacker, Character defender) {
-		int chanceToBlock = 0;
-		boolean blocked = false;
+	public boolean attackThrust(Character attacker, Character defender, int die) {
+		boolean hit = false;
 		
-		for (Equipment.Item shield : defender.getEquippedItemsList()) {
-			if (shield instanceof Equipment.Shield) {
-				chanceToBlock = ((Equipment.Shield) shield).getPassiveDefense();
+		if (defender.getState() == Character.State.Blocking) {
+			int chanceToBlock = 0;
+			for (Equipment.Item shield : defender.getEquippedItemsList()) {
+				if (shield instanceof Equipment.Shield) {
+					chanceToBlock = ((Equipment.Shield) shield).getPassiveDefense();
+				}
 			}
-		}
-		if (chanceToBlock > new DiceRoll(2,0).getValue()) {
-			blocked = true;
-		}
-		return blocked;
-	}
-
-	public boolean parry(Character attacker, Character defender) {
-		int chanceToParry = 0;
-		boolean parried = false;
-		
-		for (Equipment.Item weapon : defender.getEquippedItemsList()) {
-			if (weapon instanceof Equipment.Weapon) {
-				chanceToParry = defender.getWeaponSkill();
-			}
-		}
-		if (chanceToParry > new DiceRoll(2,0).getValue()) {
-			parried = true;
-		}
-		
-		return parried;
-	}		
-	
-	public boolean dodge(Character attacker, Character defender) {
-		int chanceToDodge = (int)defender.getMovementSpeed();
-		boolean dodged = false;
-		
-		if (chanceToDodge > new DiceRoll(2,0).getValue()) {
-			dodged = true;
-		}
-		
-		return dodged;
-	}		
-	
-	public void applyDamage (int damage, Character defender) {
-		defender.setHealth(defender.getHealth()-damage);
-	}
-	
-	public static boolean attack(Character atk, Character def){
-		
-		totalRoll = 0;
-		for(int i=0; i<3 ; i++){
-			totalRoll = totalRoll + Die.roll();
-		}
-		
-		if(totalRoll <= atk.getStrength()){
-			defend(def);
-			return true;
-		}
-		else 
-			return false;
-	}
-	
-	
-	//Är medveten om att dessa är identiska men då dessa atkskill samt defendskill behövs
-	public static boolean defend(Character def){
-		
-		totalRoll = 0;
-		int totalPassiveDefence = 0;
-		
-		for(int i=0; i<3 ; i++){
-			totalRoll = totalRoll + Die.roll();
-		}
-		
-		if(totalRoll <= def.getStrength())
-			return true;
-		else {
-			damageRoll=Die.roll();
-		
-			for(Equipment.Item item : def.getEquippedItemsList()){
-				if(item instanceof Equipment.Shield.Buckler)
-					totalPassiveDefence ++;
-				else if(item instanceof Equipment.Armor.LeatherJacket)
-					totalPassiveDefence ++;
+			if (chanceToBlock > die) {
+				hit = false;
+			} else {
+				hit = true;
 			}
 			
-			def.setHealth(def.getHealth() - damageRoll + totalPassiveDefence);
-			return false;
+		} else if (defender.getState() == Character.State.Parrying) {
+			int chanceToParry = 0;
+			
+			for (Equipment.Item weapon : defender.getEquippedItemsList()) {
+				if (weapon instanceof Equipment.Weapon) {
+					chanceToParry = defender.getWeaponSkill();
+				}
+			}
+			if (chanceToParry > die) {
+				hit = false;
+			} else {
+				hit = true;
+			}
+			
+		} else if (defender.getState() == Character.State.Dodging) {
+			int chanceToDodge = (int)defender.getMovementSpeed();
+			
+			if (chanceToDodge > die) {
+				hit = false;
+			} else {
+				hit = true;
+			}
 		}
+		
+		return hit;
+		
 	}
+	
+	public void applyDamage (Character attacker, Character defender, int die) {
+		defender.setHealth(defender.getHealth()-die);
+	}
+
+//	
+//	
+//	//Är medveten om att dessa är identiska men då dessa atkskill samt defendskill behövs
+//	public static boolean defend(Character def){
+//		
+//		totalRoll = 0;
+//		int totalPassiveDefence = 0;
+//		
+//		for(int i=0; i<3 ; i++){
+//			totalRoll = totalRoll + Die.roll();
+//		}
+//		
+//		if(totalRoll <= def.getStrength())
+//			return true;
+//		else {
+//			damageRoll=Die.roll();
+//		
+//			for(Equipment.Item item : def.getEquippedItemsList()){
+//				if(item instanceof Equipment.Shield.Buckler)
+//					totalPassiveDefence ++;
+//				else if(item instanceof Equipment.Armor.LeatherJacket)
+//					totalPassiveDefence ++;
+//			}
+//			
+//			def.setHealth(def.getHealth() - damageRoll + totalPassiveDefence);
+//			return false;
+//		}
+//	}
 }
