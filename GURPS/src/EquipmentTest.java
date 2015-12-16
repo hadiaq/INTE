@@ -39,12 +39,12 @@ public class EquipmentTest {
 
 	@Test(expected=IllegalArgumentException.class)
 	public void calculateBasicThrustingWeaponDamageZeroOrNegativeStrengthTest() {
-		DiceRoll diceRoll = Equipment.Weapon.calculateBasicWeaponDamage(0, Equipment.Weapon.AttackType.THRUSTING);
+		Equipment.Weapon.calculateBasicWeaponDamage(0, Equipment.Weapon.AttackType.THRUSTING);
 	}
 
 	@Test(expected=IllegalArgumentException.class)
 	public void calculateBasicSwingingWeaponDamageZeroOrNegativeStrengthTest() {
-		DiceRoll diceRoll = Equipment.Weapon.calculateBasicWeaponDamage(0, Equipment.Weapon.AttackType.SWINGING);
+		Equipment.Weapon.calculateBasicWeaponDamage(0, Equipment.Weapon.AttackType.SWINGING);
 	}
 	
 	@Test // Ej definerat när strength > 20 (se tabellen på sidan 18)
@@ -114,13 +114,13 @@ public class EquipmentTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void leatherJacketTooHighTechLevelTest() {
 		// TechLevel should be 1-8
-		Equipment.Armor.LeatherJacket leatherJacket = new Equipment.Armor.LeatherJacket(9);
+		new Equipment.Armor.LeatherJacket(9);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void leatherJacketTooLowTechLevelTest() {
 		// TechLevel should be 1-8
-		Equipment.Armor.LeatherJacket leatherJacket = new Equipment.Armor.LeatherJacket(0);
+		new Equipment.Armor.LeatherJacket(0);
 	}
 	
 	@Test
@@ -138,13 +138,13 @@ public class EquipmentTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void scaleArmorTooHighTechLevelTest() {
 		// TechLevel should be 2-4
-		Equipment.Armor.ScaleArmor scaleArmor = new Equipment.Armor.ScaleArmor(5);
+		new Equipment.Armor.ScaleArmor(5);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void scaleArmorTooLowTechLevelTest() {
 		// TechLevel should be 2-4
-		Equipment.Armor.ScaleArmor scaleArmor = new Equipment.Armor.ScaleArmor(1);
+		new Equipment.Armor.ScaleArmor(1);
 	}
 
 	@Test
