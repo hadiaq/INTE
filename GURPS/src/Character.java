@@ -9,7 +9,7 @@ public class Character {
 	private int ptsTotal;
 	
 	//Lista �ver advantages som �r aktiva hos denna karakt�r
-	private Map<String, Advantage> advantages = new HashMap<String, Advantage>();
+	private Set<Advantage> advantages = new HashSet<Advantage>();
 	private int ptsUnspent;
 	private int st;
 	private int dx;
@@ -106,15 +106,15 @@ public class Character {
 		items.add(item);
 	}
 	
-	public void addAdvantage(String name) {
-		advantages.put(name, GURPSmain.advMap.get(name));
+	public void addAdvantage(Advantage advantage) {
+		advantages.add(advantage);
 	}
 	
-	public void removeAdvantage(String name) {
+	public void removeAdvantage(Advantage advantage) {
 		advantages.remove(name);
 	}
 	
-	public Map<String, Advantage> getAdvantages() {
+	public Set<Advantage> getAdvantages() {
 		return advantages;
 	}
 	
