@@ -29,8 +29,15 @@ public class EquipmentTest {
 			new DiceRoll(2, -1)
 		};
 
+		for (int strength = 1; strength <= 20; strength++) {
+			DiceRoll compare = Equipment.Weapon.calculateBasicWeaponDamageThrusting(strength);
+		
+			assertEquals(basicThrustingWeaponDamageDiceRolls[strength-1].getNumberOfDices(), compare.getNumberOfDices());
+			assertEquals(basicThrustingWeaponDamageDiceRolls[strength-1].getModifier(), compare.getModifier());
+		}
+		
 		for (int strength = 1; strength < 20; strength++) {
-			DiceRoll compare = Equipment.Weapon.calculateBasicWeaponDamage(strength, Equipment.Weapon.AttackType.THRUSTING);
+			DiceRoll compare = Equipment.Weapon.calculateBasicWeaponDamageSwinging(strength);
 		
 			assertEquals(basicThrustingWeaponDamageDiceRolls[strength-1].getNumberOfDices(), compare.getNumberOfDices());
 			assertEquals(basicThrustingWeaponDamageDiceRolls[strength-1].getModifier(), compare.getModifier());
@@ -39,22 +46,22 @@ public class EquipmentTest {
 
 	@Test(expected=IllegalArgumentException.class)
 	public void calculateBasicThrustingWeaponDamageZeroOrNegativeStrengthTest() {
-		Equipment.Weapon.calculateBasicWeaponDamage(0, Equipment.Weapon.AttackType.THRUSTING);
+		Equipment.Weapon.calculateBasicWeaponDamageThrusting(0);
 	}
 
 	@Test(expected=IllegalArgumentException.class)
 	public void calculateBasicSwingingWeaponDamageZeroOrNegativeStrengthTest() {
-		Equipment.Weapon.calculateBasicWeaponDamage(0, Equipment.Weapon.AttackType.SWINGING);
+		Equipment.Weapon.calculateBasicWeaponDamageSwinging(0);
 	}
 	
 	@Test // Ej definerat när strength > 20 (se tabellen på sidan 18)
 	public void calculateBasicThrustingWeaponDamageStrengthOver20Test() {
-		assertNull(Equipment.Weapon.calculateBasicWeaponDamage(21, Equipment.Weapon.AttackType.THRUSTING));
+		assertNull(Equipment.Weapon.calculateBasicWeaponDamageThrusting(21));
 	}
 	
 	@Test // Ej definerat när strength > 20 (se tabellen på sidan 18)
 	public void calculateBasicSwingingWeaponDamageStrengthOver20Test() {
-		assertNull(Equipment.Weapon.calculateBasicWeaponDamage(21, Equipment.Weapon.AttackType.SWINGING));
+		assertNull(Equipment.Weapon.calculateBasicWeaponDamageSwinging(21));
 	}
 
 	@Test
@@ -82,8 +89,8 @@ public class EquipmentTest {
 			new DiceRoll(3, 2)
 		};
 
-		for (int strength = 1; strength < 20; strength++) {
-			DiceRoll compare = Equipment.Weapon.calculateBasicWeaponDamage(strength, Equipment.Weapon.AttackType.SWINGING);
+		for (int strength = 1; strength <= 20; strength++) {
+			DiceRoll compare = Equipment.Weapon.calculateBasicWeaponDamageSwinging(strength);
 		
 			assertEquals(basicSwingingWeaponDamageDiceRolls[strength-1].getNumberOfDices(), compare.getNumberOfDices());
 			assertEquals(basicSwingingWeaponDamageDiceRolls[strength-1].getModifier(), compare.getModifier());

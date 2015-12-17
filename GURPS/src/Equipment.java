@@ -128,102 +128,88 @@ public final class Equipment {
 		public int getDamageType() {
 			return damageType;
 		}
-
-		// Hämtat från tabell sida 18
-		public static DiceRoll calculateBasicWeaponDamage(int strength, AttackType attackType) {
+		
+		public static DiceRoll calculateBasicWeaponDamageThrusting(int strength) {
 			if (strength <= 0) {
 				throw new IllegalArgumentException();
 			} else if (strength > 0 && strength <= 4) {
 				return new DiceRoll(0, 0);
-			} else {
-				if (strength == 5)
-					return new DiceRoll(1, -5);
-				else if (strength == 6)
-					return new DiceRoll(1, -4);
-				else if (strength == 7)
-					return new DiceRoll(1, -3);
-				else if (strength == 8) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(1, -3);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(1, -2);
-					}
-				} else if (strength == 9) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(1, -2);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(1, -1);
-					}
-				} else if (strength == 10) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(1, -2);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(1, 0);
-					}
-				} else if (strength == 11) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(1, -1);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(1, 1);
-					}
-				} else if (strength == 12) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(1, -1);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(1, 2);
-					}
-				} else if (strength == 13) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(1, 0);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(2, -1);
-					}
-				} else if (strength == 14) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(1, 0);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(2, 0);
-					}
-				} else if (strength == 15) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(1, 1);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(2, 1);
-					}
-				} else if (strength == 16) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(1, 1);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(2, 2);
-					}
-				} else if (strength == 17) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(1, 2);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(3, -1);
-					}
-				} else if (strength == 18) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(1, 2);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(3, 0);
-					}
-				} else if (strength == 19) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(2, -1);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(3, 1);
-					}
-				} else if (strength == 20) {
-					if (attackType == AttackType.THRUSTING) {
-						return new DiceRoll(2, -1);
-					} else if (attackType == AttackType.SWINGING) {
-						return new DiceRoll(3, 2);
-					}
-				}
-
-				return null;
+			} else if (strength == 5) {
+				return new DiceRoll(1, -5);
+			} else if (strength == 6) {
+				return new DiceRoll(1, -4);
+			} else if (strength == 7) {
+				return new DiceRoll(1, -3);
+			} else if (strength == 8) {
+				return new DiceRoll(1, -3);
+			} else if (strength == 9) {
+				return new DiceRoll(1, -2);
+			} else if (strength == 10) {
+				return new DiceRoll(1, -2);
+			} else if (strength == 11) {
+				return new DiceRoll(1, -1);
+			} else if (strength == 12) {
+				return new DiceRoll(1, -1);
+			} else if (strength == 13) {
+				return new DiceRoll(1, 0);
+			} else if (strength == 14) {
+				return new DiceRoll(1, 0);
+			} else if (strength == 15) {
+				return new DiceRoll(1, 1);
+			} else if (strength == 16) {
+				return new DiceRoll(1, 1);
+			} else if (strength == 17) {
+				return new DiceRoll(1, 2);
+			} else if (strength == 18) {
+				return new DiceRoll(1, 2);
+			} else if (strength == 19) {
+				return new DiceRoll(2, -1);
+			} else if (strength == 20) {
+				return new DiceRoll(2, -1);
 			}
+			return null;
+		}
+
+		// Hämtat från tabell sida 18
+		public static DiceRoll calculateBasicWeaponDamageSwinging(int strength) {
+			if (strength <= 0) {
+				throw new IllegalArgumentException();
+			} else if (strength > 0 && strength <= 4) {
+				return new DiceRoll(0, 0);
+			} else if (strength == 5) {
+				return new DiceRoll(1, -5);
+			} else if (strength == 6) {
+				return new DiceRoll(1, -4);
+			} else if (strength == 7) {
+				return new DiceRoll(1, -3);
+			} else if (strength == 8) {
+				return new DiceRoll(1, -2);
+			} else if (strength == 9) {
+				return new DiceRoll(1, -1);
+			} else if (strength == 10) {
+				return new DiceRoll(1, 0);
+			} else if (strength == 11) {
+				return new DiceRoll(1, 1);
+			} else if (strength == 12) {
+				return new DiceRoll(1, 2);
+			} else if (strength == 13) {
+				return new DiceRoll(2, -1);
+			} else if (strength == 14) {
+				return new DiceRoll(2, 0);
+			} else if (strength == 15) {
+				return new DiceRoll(2, 1);
+			} else if (strength == 16) {
+				return new DiceRoll(2, 2);
+			} else if (strength == 17) {
+				return new DiceRoll(3, -1);
+			} else if (strength == 18) {
+				return new DiceRoll(3, 0);
+			} else if (strength == 19) {
+				return new DiceRoll(3, 1);
+			} else if (strength == 20) {
+				return new DiceRoll(3, 2);
+			}
+			return null;
 		}	
 
 		public abstract int calculateWeaponDamage(int damageType);

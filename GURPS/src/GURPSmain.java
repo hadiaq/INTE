@@ -717,8 +717,6 @@ public class GURPSmain {
 
 	public static void main(String[] args) {
 		System.out.println("GURPS lite");
-//		new GURPSmain();
-//		System.out.println(characters);
 	}
 
 }
