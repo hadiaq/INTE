@@ -2,8 +2,8 @@
 import java.util.Random;
 
 public class Die {
-	public static int MIN_VALUE = 1;
-	public static int MAX_VALUE = 6;
+	public static final int MIN_VALUE = 1;
+	public static final int MAX_VALUE = 6;
 	
 	public int value;
 
@@ -16,7 +16,7 @@ public class Die {
 		return value;
 	}
 	
-	public static int roll() {
+	public final int roll() {
 		Random ran = new Random();
 		return ran.nextInt(MAX_VALUE) +1;
 		

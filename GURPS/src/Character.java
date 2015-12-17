@@ -113,7 +113,7 @@ public class Character {
 	}
 	
 	public void removeAdvantage(Advantage advantage) {
-		advantages.remove(name);
+		advantages.remove(advantage);
 	}
 	
 	public Set<Advantage> getAdvantages() {
