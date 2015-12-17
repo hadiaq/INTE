@@ -21,6 +21,6 @@ public class DiceRollTest {
 	// -2d+2 inte tillåtet!
 	@Test(expected=IllegalArgumentException.class)
 	public void negativeNumberOfDicesTest() {
-		DiceRoll diceRoll = new DiceRoll(-2, 2);
+		new DiceRoll(-2, 2);
 	}
 }

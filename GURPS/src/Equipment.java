@@ -132,7 +132,7 @@ public final class Equipment {
 		public static DiceRoll calculateBasicWeaponDamageThrusting(int strength) {
 			if (strength <= 0) {
 				throw new IllegalArgumentException();
-			} else if (strength > 0 && strength <= 4) {
+			} else if (strength <= 4) {
 				return new DiceRoll(0, 0);
 			} else if (strength == 5) {
 				return new DiceRoll(1, -5);
@@ -174,7 +174,7 @@ public final class Equipment {
 		public static DiceRoll calculateBasicWeaponDamageSwinging(int strength) {
 			if (strength <= 0) {
 				throw new IllegalArgumentException();
-			} else if (strength > 0 && strength <= 4) {
+			} else if (strength <= 4) {
 				return new DiceRoll(0, 0);
 			} else if (strength == 5) {
 				return new DiceRoll(1, -5);

@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 
 public class Combat {
-	static int totalRoll;
-	static int damageRoll;
 	private Character char1;
 	private Character char2;
 	
@@ -13,16 +11,16 @@ public class Combat {
 	
 	public Character getStartingCharacter (int dieRoll) {
 		Character startingChar = null;
-		Double d1 = new Double(char1.getMovementSpeed());
-		Double d2 = new Double(char2.getMovementSpeed());
+		double d1 = char1.getMovementSpeed();
+		double d2 = char2.getMovementSpeed();
 		
-		if (d1.compareTo(d2) > 0 ) {
+		if (d1 > d2 ) {
 			startingChar = char1;
 			
-		} else if (d1.compareTo(d2)<0) {
+		} else if (d1 < d2) {
 			startingChar = char2;
 			
-		} else if (d1.compareTo(d2)==0 && dieRoll <= 3) {
+		} else if (d1==d2 && dieRoll <= 3) {
 			startingChar = char1;
 			
 		} else {

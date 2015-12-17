@@ -235,7 +235,7 @@ public class CharacterTest {
 		Character newChar = new Character("Test", 100);
 		newChar.setDexterity(12);
 		newChar.setHealth(9);
-		double expected = ((newChar.getDexterity()+newChar.getHealth())/4);
+		double expected = (((double)newChar.getDexterity()+(double)newChar.getHealth())/4);
 		assertEquals(newChar.getMovementSpeed(), expected, DELTA);
 
 	}

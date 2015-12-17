@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class GURPSmain {
 	
-	public static Map<String, Character> charMap = new HashMap<String, Character>();
+	private static final Map<String, Character> charMap = new HashMap<String, Character>();
 
 	public static Equipment.Shield createShield(String description, int value, double weight, int passiveDefence){
 		if(description == null)

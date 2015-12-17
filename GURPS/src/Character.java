@@ -125,7 +125,7 @@ public class Character {
 	}
 	
 	public double getMovementSpeed(){
-		return (this.dx+this.ht)/4;
+		return ((double)this.dx+(double)this.ht)/4;
 	}
 	
 	public void setName(String name) {
