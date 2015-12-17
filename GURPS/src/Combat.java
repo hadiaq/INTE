@@ -125,32 +125,4 @@ public class Combat {
 		defender.setHealth(defender.getHealth()-die);
 	}
 
-//	
-//	
-//	//Är medveten om att dessa är identiska men då dessa atkskill samt defendskill behövs
-//	public static boolean defend(Character def){
-//		
-//		totalRoll = 0;
-//		int totalPassiveDefence = 0;
-//		
-//		for(int i=0; i<3 ; i++){
-//			totalRoll = totalRoll + Die.roll();
-//		}
-//		
-//		if(totalRoll <= def.getStrength())
-//			return true;
-//		else {
-//			damageRoll=Die.roll();
-//		
-//			for(Equipment.Item item : def.getEquippedItemsList()){
-//				if(item instanceof Equipment.Shield.Buckler)
-//					totalPassiveDefence ++;
-//				else if(item instanceof Equipment.Armor.LeatherJacket)
-//					totalPassiveDefence ++;
-//			}
-//			
-//			def.setHealth(def.getHealth() - damageRoll + totalPassiveDefence);
-//			return false;
-//		}
-//	}
 }
