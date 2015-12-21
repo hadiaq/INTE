@@ -36,8 +36,8 @@ public class EquipmentTest {
 			assertEquals(basicThrustingWeaponDamageDiceRolls[strength-1].getModifier(), compare.getModifier());
 		}
 		
-		for (int strength = 1; strength < 20; strength++) {
-			DiceRoll compare = Equipment.Weapon.calculateBasicWeaponDamageSwinging(strength);
+		for (int strength = 1; strength <= 20; strength++) {
+			DiceRoll compare = Equipment.Weapon.calculateBasicWeaponDamageThrusting(strength);
 		
 			assertEquals(basicThrustingWeaponDamageDiceRolls[strength-1].getNumberOfDices(), compare.getNumberOfDices());
 			assertEquals(basicThrustingWeaponDamageDiceRolls[strength-1].getModifier(), compare.getModifier());

@@ -21,6 +21,11 @@ public class GURPSmain {
 	}
 
 	public static void main(String[] args) {
+		for (int i=0; i<15000000; i++) {
+			Character ch = new Character("asdf", 100);
+			Equipment.Shield sh = createShield("shield", 5, 10, 15);
+			ch.equip(sh);
+		}
 		System.out.println("GURPS lite");
 	}
 
